@@ -1,0 +1,21 @@
+c:\users\luke\documents\visual studio 2012\Projects\FileShare\bin\Debug\FileShare.exe.config
+c:\users\luke\documents\visual studio 2012\Projects\FileShare\bin\Debug\FileShare.exe
+c:\users\luke\documents\visual studio 2012\Projects\FileShare\bin\Debug\FileShare.pdb
+c:\users\luke\documents\visual studio 2012\Projects\FileShare\obj\Debug\FileShare.csprojResolveAssemblyReference.cache
+c:\users\luke\documents\visual studio 2012\Projects\FileShare\obj\Debug\FileShare.Form1.resources
+c:\users\luke\documents\visual studio 2012\Projects\FileShare\obj\Debug\FileShare.Properties.Resources.resources
+c:\users\luke\documents\visual studio 2012\Projects\FileShare\obj\Debug\FileShare.csproj.GenerateResource.Cache
+c:\users\luke\documents\visual studio 2012\Projects\FileShare\obj\Debug\FileShare.exe
+c:\users\luke\documents\visual studio 2012\Projects\FileShare\obj\Debug\FileShare.pdb
+C:\Users\HP user\Documents\Dropbox\proftaak\VS Project\FileShare\bin\Debug\FileShare.exe.config
+C:\Users\HP user\Documents\Dropbox\proftaak\VS Project\FileShare\obj\Debug\FileShare.exe
+C:\Users\HP user\Documents\Dropbox\proftaak\VS Project\FileShare\obj\Debug\FileShare.pdb
+C:\Users\Mr. Jin\Dropbox\proftaak\VS Project\FileShare\bin\Debug\FileShare.exe.config
+C:\Users\Mr. Jin\Dropbox\proftaak\VS Project\FileShare\obj\Debug\FileShare.exe
+C:\Users\Mr. Jin\Dropbox\proftaak\VS Project\FileShare\obj\Debug\FileShare.pdb
+C:\Users\HP user\Source\Repos\FileShare\bin\Debug\FileShare.exe.config
+C:\Users\HP user\Source\Repos\FileShare\obj\Debug\FileShare.exe
+C:\Users\HP user\Source\Repos\FileShare\obj\Debug\FileShare.pdb
+C:\Users\HP user\Source\Repos\Fileshare2\bin\Debug\FileShare.exe.config
+C:\Users\HP user\Source\Repos\Fileshare2\obj\Debug\FileShare.exe
+C:\Users\HP user\Source\Repos\Fileshare2\obj\Debug\FileShare.pdb
