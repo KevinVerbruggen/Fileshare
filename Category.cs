@@ -8,5 +8,9 @@ namespace FileShare
 {
     class Category
     {
+        private DBconnect Connectie = DBconnect.Instantie;
+        private List<File> Files = new List<File>();
+
+
     }
 }

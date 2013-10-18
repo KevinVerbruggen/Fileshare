@@ -19,3 +19,10 @@ C:\Users\HP user\Source\Repos\FileShare\obj\Debug\FileShare.pdb
 C:\Users\HP user\Source\Repos\Fileshare2\bin\Debug\FileShare.exe.config
 C:\Users\HP user\Source\Repos\Fileshare2\obj\Debug\FileShare.exe
 C:\Users\HP user\Source\Repos\Fileshare2\obj\Debug\FileShare.pdb
+C:\Users\Mr. Jin\Source\Repos\Fileshare\bin\Debug\FileShare.exe.config
+C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.exe
+C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.pdb
+C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.csprojResolveAssemblyReference.cache
+C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.FileShareForm.resources
+C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.Properties.Resources.resources
+C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.csproj.GenerateResource.Cache

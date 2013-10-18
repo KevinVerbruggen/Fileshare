@@ -19,7 +19,7 @@ using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System.Data;
 
-namespace Interface_ICT4events
+namespace FileShare
 {
     class DBconnect
     {
