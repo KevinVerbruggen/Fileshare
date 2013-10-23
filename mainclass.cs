@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic.Devices;
+using Microsoft.VisualBasic.FileIO;
 
 namespace FileShare
 {
@@ -12,6 +13,7 @@ namespace FileShare
     {
         public static List<File> AlleFiles = new List<File>();
         public static List<Categorie> AlleCategorieen = new List<Categorie>();
+        Computer myComputer = new Computer();
 
         public static void InitialiseerApp()
         {
@@ -38,12 +40,14 @@ namespace FileShare
             connectie.Delete("Bestand", "BestandID = " + bestandID);
         }
 
-        public void UploadBestand(int bestandID){
-           My.Computer.Network.CopyFile(mainclass.uploadBestandLocatie, @"\\FILESHARE-SERVER\" + mainclass.GetCountBestanden());
+        public void UploadBestand(string uploadBestandLocatie){
+            int bestandID = mainclass.GetMaxBestandID() + 1;
+            myComputer.Network.CopyFile(uploadBestandLocatie, @"\\FILESHARE-SERVER\" + bestandID);
+            connectie.Insert("Bestand", NieuwBestandNaam + ", " + bestandID.ToString() + ", " + mainclass.localUser.BezoekerID.get(), "Naam, Locatie, bezoekerID");
         }
 
         public void DownloadBestand(int bestandID){
-            My.Computer.Network.CopyFile(@"\\FILESHARE-SERVER\" + mainclass.GetGeselecteerdBestandID, @"%USERPROFILE%\Downloads\" + mainclass.GetGeselecteerdBestandNaam();
+            myComputer.Network.CopyFile(@"\\FILESHARE-SERVER\" + mainclass.GetGeselecteerdBestandID, @"%USERPROFILE%\Downloads\" + mainclass.GetGeselecteerdBestandNaam();
         }
     }
 }

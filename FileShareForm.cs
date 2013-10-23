@@ -20,8 +20,21 @@ namespace FileShare
 
         private void buttonUploaden_Click(object sender, EventArgs e)
         {
-            //OpenFileDialog
-            mainclass.UploadBestand();
+            string uploadBestandLocatie = "";
+            OpenFileDialog kiesBestandDialog = new OpenFileDialog();
+            kiesBestandDialog.Filter = "Text Files (.txt)|*.txt|Microsoft Word-bestanden (.doc, .docx)|*.doc, *.docx|Afbeeldingen (.jpg, .png, .bmp, .tif)|*.jpg, *.jpeg, *.png, *.bmp, *.dip, *.tif, *.tiff|Alle Bestanden (*.*)|*.*";
+            kiesBestandDialog.Multiselect = false;
+            bool? OKGeklikt = kiesBestandDialog.ShowDialog();
+
+            // Process input if the user clicked OK.
+            if (OKGeklikt == true)
+            {
+                uploadBestandLocatie = kiesBestandDialog.FileName;
+            }
+            if (uploadBestandLocatie != "")
+            {
+                mainclass.UploadBestand(uploadBestandLocatie);
+            }
         }
 
         private void buttonDownloaden_Click(object sender, EventArgs e)
