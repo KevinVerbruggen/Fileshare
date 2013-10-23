@@ -35,13 +35,15 @@
             this.buttonDownvote = new System.Windows.Forms.Button();
             this.buttonUploaden = new System.Windows.Forms.Button();
             this.listBoxCategorie = new System.Windows.Forms.ListBox();
+            this.buttonVernieuwen = new System.Windows.Forms.Button();
+            this.buttonVerwijderen2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewBestanden
             // 
             this.listViewBestanden.Location = new System.Drawing.Point(13, 13);
             this.listViewBestanden.Name = "listViewBestanden";
-            this.listViewBestanden.Size = new System.Drawing.Size(555, 409);
+            this.listViewBestanden.Size = new System.Drawing.Size(555, 448);
             this.listViewBestanden.TabIndex = 0;
             this.listViewBestanden.UseCompatibleStateImageBehavior = false;
             this.listViewBestanden.SelectedIndexChanged += new System.EventHandler(this.listViewBestanden_SelectedIndexChanged);
@@ -58,11 +60,11 @@
             // 
             // buttonVerwijder
             // 
-            this.buttonVerwijder.Location = new System.Drawing.Point(591, 187);
+            this.buttonVerwijder.Location = new System.Drawing.Point(591, 189);
             this.buttonVerwijder.Name = "buttonVerwijder";
             this.buttonVerwijder.Size = new System.Drawing.Size(185, 31);
             this.buttonVerwijder.TabIndex = 2;
-            this.buttonVerwijder.Text = "Verwijderen";
+            this.buttonVerwijder.Text = "Bestand Verwijderen";
             this.buttonVerwijder.UseVisualStyleBackColor = true;
             this.buttonVerwijder.Click += new System.EventHandler(this.buttonVerwijder_Click);
             // 
@@ -99,18 +101,40 @@
             // listBoxCategorie
             // 
             this.listBoxCategorie.FormattingEnabled = true;
-            this.listBoxCategorie.Location = new System.Drawing.Point(591, 224);
+            this.listBoxCategorie.Location = new System.Drawing.Point(591, 314);
             this.listBoxCategorie.Name = "listBoxCategorie";
             this.listBoxCategorie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxCategorie.Size = new System.Drawing.Size(185, 199);
+            this.listBoxCategorie.Size = new System.Drawing.Size(185, 147);
             this.listBoxCategorie.TabIndex = 7;
             this.listBoxCategorie.SelectedIndexChanged += new System.EventHandler(this.listBoxCategorie_SelectedIndexChanged);
+            // 
+            // buttonVernieuwen
+            // 
+            this.buttonVernieuwen.Location = new System.Drawing.Point(591, 277);
+            this.buttonVernieuwen.Name = "buttonVernieuwen";
+            this.buttonVernieuwen.Size = new System.Drawing.Size(185, 31);
+            this.buttonVernieuwen.TabIndex = 8;
+            this.buttonVernieuwen.Text = "Lijst Vernieuwen";
+            this.buttonVernieuwen.UseVisualStyleBackColor = true;
+            this.buttonVernieuwen.Click += new System.EventHandler(this.buttonVernieuwen_Click);
+            // 
+            // buttonVerwijderen2
+            // 
+            this.buttonVerwijderen2.Location = new System.Drawing.Point(591, 226);
+            this.buttonVerwijderen2.Name = "buttonVerwijderen2";
+            this.buttonVerwijderen2.Size = new System.Drawing.Size(185, 31);
+            this.buttonVerwijderen2.TabIndex = 9;
+            this.buttonVerwijderen2.Text = "Categorie Verwijderen";
+            this.buttonVerwijderen2.UseVisualStyleBackColor = true;
+            this.buttonVerwijderen2.Click += new System.EventHandler(this.buttonVerwijderen2_Click);
             // 
             // FileShareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 434);
+            this.ClientSize = new System.Drawing.Size(801, 473);
+            this.Controls.Add(this.buttonVerwijderen2);
+            this.Controls.Add(this.buttonVernieuwen);
             this.Controls.Add(this.listBoxCategorie);
             this.Controls.Add(this.buttonUploaden);
             this.Controls.Add(this.buttonDownvote);
@@ -133,6 +157,8 @@
         private System.Windows.Forms.Button buttonDownvote;
         private System.Windows.Forms.Button buttonUploaden;
         private System.Windows.Forms.ListBox listBoxCategorie;
+        private System.Windows.Forms.Button buttonVernieuwen;
+        private System.Windows.Forms.Button buttonVerwijderen2;
     }
 }
 

@@ -26,3 +26,4 @@ C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.csprojResolveAssembl
 C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.FileShareForm.resources
 C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.Properties.Resources.resources
 C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.csproj.GenerateResource.Cache
+C:\Users\HP user\Source\Repos\FileshareSME\bin\Debug\FileShare.exe.config

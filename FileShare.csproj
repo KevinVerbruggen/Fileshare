@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Category.cs" />
+    <Compile Include="Categorie.cs" />
     <Compile Include="DBConnect.cs" />
     <Compile Include="File.cs" />
     <Compile Include="FileShareForm.cs">
