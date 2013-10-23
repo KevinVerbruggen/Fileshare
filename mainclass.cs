@@ -4,8 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic.Devices;
+using System.IO.Path;
 using Microsoft.VisualBasic.FileIO;
+using Microsoft.VisualBasic.Devices;
 
 namespace FileShare
 {
@@ -13,12 +14,11 @@ namespace FileShare
     {
         public static List<File> AlleFiles = new List<File>();
         public static List<Categorie> AlleCategorieen = new List<Categorie>();
-        Computer myComputer = new Computer();
+        static Computer myComputer = new Computer();
+        static DBconnect connectie = DBconnect.Instantie;
 
         public static void InitialiseerApp()
         {
-            DBconnect connectie = DBconnect.Instantie;
-
             //hier worden alle datatables aangemaakt en gevuld
             DataTable bestandenTabel;
             bestandenTabel = connectie.SelectMultiple("Bestand", "*");
@@ -27,7 +27,7 @@ namespace FileShare
 
             foreach (DataRow row in bestandenTabel.Rows)
             {
-                AlleFiles.Add(new File(Int32.Parse(row["BestandID"].ToString()), row["Naam"].ToString(), Int32.Parse(row["BezoekerID"].ToString())));
+                AlleFiles.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
             }
         }
 
@@ -36,18 +36,18 @@ namespace FileShare
             connectie.Delete("Vote", "BestandID = " + bestandID );
             connectie.Delete("Flag", "BestandID = " + bestandID );
             connectie.Delete("Bestand_Categorie", "BestandID = " + bestandID);
-            My.Computer.FileSystem.DeleteFile(@"\\FILESHARE-SERVER\" + mainclass.geselecteerdBestand.GetLocatie(), _FileIO.UIOption.AllDialogs, FileIO.RecycleOption.DeletePermanently, FileIO.UICancelOption.DoNothing);
+            myComputer.FileSystem.DeleteFile(@"\\FILESHARE-SERVER\" + geselecteerdBestand.GetLocatie(), Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
             connectie.Delete("Bestand", "BestandID = " + bestandID);
         }
 
-        public void UploadBestand(string uploadBestandLocatie){
-            int bestandID = mainclass.GetMaxBestandID() + 1;
-            myComputer.Network.CopyFile(uploadBestandLocatie, @"\\FILESHARE-SERVER\" + bestandID);
-            connectie.Insert("Bestand", NieuwBestandNaam + ", " + bestandID.ToString() + ", " + mainclass.localUser.BezoekerID.get(), "Naam, Locatie, bezoekerID");
+        public static void UploadBestand(string uploadBestandLocatie){
+            int bestandID = GetMaxBestandID() + 1;
+            myComputer.FileSystem.CopyFile(uploadBestandLocatie, @"\\FILESHARE-SERVER\" + bestandID);
+            connectie.Insert("Bestand", System.IO.Path.GetFileName(uploadBestandLocatie)+ ", " + bestandID.ToString() + ", " + localUser.BezoekerID.get(), "Naam, Locatie, bezoekerID");
         }
 
         public void DownloadBestand(int bestandID){
-            myComputer.Network.CopyFile(@"\\FILESHARE-SERVER\" + mainclass.GetGeselecteerdBestandID, @"%USERPROFILE%\Downloads\" + mainclass.GetGeselecteerdBestandNaam();
+            myComputer.FileSystem.CopyFile(@"\\FILESHARE-SERVER\" + GetGeselecteerdBestandID, @"%USERPROFILE%\Downloads\" + GetGeselecteerdBestandNaam();
         }
     }
 }

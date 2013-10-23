@@ -16,6 +16,10 @@ namespace FileShare
         {
             InitializeComponent();
             mainclass.InitialiseerApp();
+            foreach (File bestand in mainclass.AlleFiles)
+            {
+                listViewBestanden.Items.Add(bestand.naam);
+            }
         }
 
         private void buttonUploaden_Click(object sender, EventArgs e)
@@ -24,10 +28,7 @@ namespace FileShare
             OpenFileDialog kiesBestandDialog = new OpenFileDialog();
             kiesBestandDialog.Filter = "Text Files (.txt)|*.txt|Microsoft Word-bestanden (.doc, .docx)|*.doc, *.docx|Afbeeldingen (.jpg, .png, .bmp, .tif)|*.jpg, *.jpeg, *.png, *.bmp, *.dip, *.tif, *.tiff|Alle Bestanden (*.*)|*.*";
             kiesBestandDialog.Multiselect = false;
-            bool? OKGeklikt = kiesBestandDialog.ShowDialog();
-
-            // Process input if the user clicked OK.
-            if (OKGeklikt == true)
+            if (kiesBestandDialog.ShowDialog() == DialogResult.OK);
             {
                 uploadBestandLocatie = kiesBestandDialog.FileName;
             }
