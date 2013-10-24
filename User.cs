@@ -27,6 +27,7 @@ namespace FileShare
             get { return admin; }
         }
 
+
         //De constructor. Met deze functie worden de variabelen met de waardes van een huurder uit de database gevuld. 
         public User(int bezoekerID, Boolean admin)
         {

@@ -12,13 +12,18 @@ namespace FileShare
 {
     public partial class FileShareForm : Form
     {
+        public string UserName
+        {
+            set 
+            { 
+                labelIngelogdAls.Text = "Ingelogd als: " + value;
+            }
+        }
+
         public FileShareForm()
         {
             InitializeComponent();
             mainclass.InitialiseerApp();
-
-            //Dit moet bij het inloggen geset worden
-            mainclass.localUser = new User(1, false);
 
             buttonVernieuwen_Click(null, null);
         }
@@ -31,10 +36,9 @@ namespace FileShare
 
         private void buttonDownloaden_Click(object sender, EventArgs e)
         {
-
+            
         }
 
-        //werkend
         private void buttonUpvote_Click(object sender, EventArgs e)
         {
             if (ListBoxBestanden.SelectedItems.Count > 0)
@@ -45,7 +49,6 @@ namespace FileShare
             }
         }
 
-        //werkend
         private void buttonDownvote_Click(object sender, EventArgs e)
         {
             if (ListBoxBestanden.SelectedItems.Count > 0)
@@ -59,16 +62,6 @@ namespace FileShare
         private void buttonVerwijder_Click(object sender, EventArgs e)
         {
             //mainclass.localUser.VerwijderBestand(mainclass.GetGeselecteerdBestandID);
-        }
-
-        private void listBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ListBoxBestanden_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonVernieuwen_Click(object sender, EventArgs e)

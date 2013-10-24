@@ -17,16 +17,30 @@ namespace FileShare
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
             if (tbGebruikersnaam.TextLength > 0 && tbWachtwoord.TextLength > 0)
             {
-                DataRow inlog = DBconnect.Instantie.SingleSelect("account", "gebruikersnaam, wachtwoord", "gebruikersnaam = '" + tbGebruikersnaam.Text + "' AND wachtwoord = '" + tbWachtwoord.Text + "'");
+                DataRow inlog = DBconnect.Instantie.SingleSelect("account", "*", "gebruikersnaam = '" + tbGebruikersnaam.Text + "' AND wachtwoord = '" + tbWachtwoord.Text + "'");
+
                 if (inlog != null)
                 {
-                    FileShareForm f = new FileShareForm();
-                    f.Show();
-                    this.Hide();
+                    if (inlog["soort"].ToString() == "geblokkeerd")
+                    {
+                        MessageBox.Show("Uw account is geblokkeerd.");
+                    }
+                    else
+                    {
+                        FileShareForm f = new FileShareForm();
+                        f.UserName = inlog["gebruikersnaam"].ToString();
+                        f.Show();
+                        this.Hide();
+
+
+                        //Haal gegevens uit DataRow om localUser te vullen
+                        bool soortAccount = (inlog["soort"].ToString() == "admin") ? true : false;
+                        mainclass.localUser = new User((int)inlog["BezoekerID"], soortAccount);
+                    }
                 }
                 else
                 {
