@@ -16,12 +16,17 @@ namespace FileShare
         {
             InitializeComponent();
             mainclass.InitialiseerApp();
+
+            //Dit moet bij het inloggen geset worden
+            mainclass.localUser = new User(1, false);
+
+            buttonVernieuwen_Click(null, null);
         }
 
         private void buttonUploaden_Click(object sender, EventArgs e)
         {
             //OpenFileDialog
-            mainclass.UploadBestand();
+            //mainclass.UploadBestand();
         }
 
         private void buttonDownloaden_Click(object sender, EventArgs e)
@@ -29,19 +34,29 @@ namespace FileShare
 
         }
 
+        //werkend
         private void buttonUpvote_Click(object sender, EventArgs e)
         {
-            mainclass.localUser.Vote(true);
+            if (ListBoxBestanden.SelectedItems.Count > 0)
+            {
+                int id = mainclass.AlleFiles[ListBoxBestanden.SelectedIndex].BestandID;
+                mainclass.localUser.Vote(true, id);
+            }
         }
 
+        //werkend
         private void buttonDownvote_Click(object sender, EventArgs e)
         {
-            mainclass.localUser.Vote(false);
+            if (ListBoxBestanden.SelectedItems.Count > 0)
+            {
+                int id = mainclass.AlleFiles[ListBoxBestanden.SelectedIndex].BestandID;
+                mainclass.localUser.Vote(false, id);
+            }
         }
 
         private void buttonVerwijder_Click(object sender, EventArgs e)
         {
-            mainclass.localUser.VerwijderBestand(mainclass.GetGeselecteerdBestandID);
+            //mainclass.localUser.VerwijderBestand(mainclass.GetGeselecteerdBestandID);
         }
 
         private void listBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,7 +64,7 @@ namespace FileShare
 
         }
 
-        private void listViewBestanden_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBoxBestanden_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -57,17 +72,15 @@ namespace FileShare
         private void buttonVernieuwen_Click(object sender, EventArgs e)
         {
             this.listBoxCategorie.Items.Clear();
-            this.listViewBestanden.Items.Clear();
-            mainclass.bestandenTabel.clear();
-            mainclass.categorienTabel.clear();
+            this.ListBoxBestanden.Items.Clear();
             //mainclass.vulTabellen();
-            this.listBoxCategorie.Items.AddRange(mainclass.GetCategorieenLijst());
-            this.listViewBestanden.Items.AddRange(mainclass.GetBestandenLijst());
+            this.listBoxCategorie.Items.AddRange(mainclass.AlleCategorieen.ToArray());
+            this.ListBoxBestanden.Items.AddRange(mainclass.AlleFiles.ToArray());
         }
 
         private void buttonVerwijderen2_Click(object sender, EventArgs e)
         {
-            mainclass.localUser.VerwijderCategorie(mainclass.GetGeselecteerdeCategorieID);
+            // mainclass.localUser.VerwijderCategorie(mainclass.GetGeselecteerdeCategorieID);
         }
     }
 }

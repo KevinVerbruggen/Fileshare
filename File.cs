@@ -11,7 +11,7 @@ namespace FileShare
         //Alle variabelen.
         private int bestandID;
         private string naam;
-        private List<int> CategorieIDs;
+        private List<int> categorieIDs;
         private int bezoekerID;
         private string locatie;
 
@@ -20,7 +20,7 @@ namespace FileShare
         {
             this.bestandID = bestandID;
             this.naam = naam;
-            this.CategorieIDs = CategorieIDs;
+            this.categorieIDs = CategorieIDs;
             this.bezoekerID = bezoekerID;
         }
 
@@ -29,9 +29,34 @@ namespace FileShare
         {
             this.bestandID = bestandID;
             this.naam = naam;
-            this.CategorieIDs = CategorieIDs;
+            this.categorieIDs = CategorieIDs;
             this.bezoekerID = bezoekerID;
             this.locatie = locatie;
+        }
+
+        public int BestandID
+        {
+            get { return bestandID; }
+        }
+
+        public string GetLocatie
+        {
+            get { return locatie; }
+        }
+
+        public int GetUserID
+        {
+            get { return bezoekerID; }
+        }
+
+        public List<int> CategorieIDs
+        {
+            get { return categorieIDs; }
+        }
+
+        public override string ToString()
+        {
+            return String.Format("ID: {0}, Naam: {1}", bestandID, naam);
         }
     }
 }

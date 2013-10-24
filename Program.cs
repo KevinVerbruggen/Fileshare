@@ -16,7 +16,7 @@ namespace FileShare
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FileShareForm());
+            Application.Run(new Login());
         }
     }
 }

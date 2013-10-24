@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listViewBestanden = new System.Windows.Forms.ListView();
+            this.ListBoxBestanden = new System.Windows.Forms.ListBox();
             this.buttonDownloaden = new System.Windows.Forms.Button();
             this.buttonVerwijder = new System.Windows.Forms.Button();
             this.buttonUpvote = new System.Windows.Forms.Button();
@@ -39,14 +39,15 @@
             this.buttonVerwijderen2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listViewBestanden
+            // ListBoxBestanden
             // 
-            this.listViewBestanden.Location = new System.Drawing.Point(13, 13);
-            this.listViewBestanden.Name = "listViewBestanden";
-            this.listViewBestanden.Size = new System.Drawing.Size(555, 448);
-            this.listViewBestanden.TabIndex = 0;
-            this.listViewBestanden.UseCompatibleStateImageBehavior = false;
-            this.listViewBestanden.SelectedIndexChanged += new System.EventHandler(this.listViewBestanden_SelectedIndexChanged);
+            this.ListBoxBestanden.Location = new System.Drawing.Point(13, 13);
+            this.listBoxCategorie.FormattingEnabled = true;
+            this.listBoxCategorie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.ListBoxBestanden.Name = "ListBoxBestanden";
+            this.ListBoxBestanden.Size = new System.Drawing.Size(555, 448);
+            this.ListBoxBestanden.TabIndex = 0;
+            this.ListBoxBestanden.SelectedIndexChanged += new System.EventHandler(this.ListBoxBestanden_SelectedIndexChanged);
             // 
             // buttonDownloaden
             // 
@@ -141,7 +142,7 @@
             this.Controls.Add(this.buttonUpvote);
             this.Controls.Add(this.buttonVerwijder);
             this.Controls.Add(this.buttonDownloaden);
-            this.Controls.Add(this.listViewBestanden);
+            this.Controls.Add(this.ListBoxBestanden);
             this.Name = "FileShareForm";
             this.Text = "FileShare";
             this.ResumeLayout(false);
@@ -150,7 +151,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listViewBestanden;
+        private System.Windows.Forms.ListBox ListBoxBestanden;
         private System.Windows.Forms.Button buttonDownloaden;
         private System.Windows.Forms.Button buttonVerwijder;
         private System.Windows.Forms.Button buttonUpvote;

@@ -28,7 +28,7 @@ namespace FileShare
         public Vote(string voterID, string bestandID, Boolean upvote) {
             this.voterID = voterID;
             this.bestandID = bestandID;
-            this.upvote = mainclass.StringToBool(upvote);
+            //this.upvote = mainclass.StringToBool(upvote);
         }
 
     }

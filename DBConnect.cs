@@ -123,7 +123,7 @@ namespace FileShare
         }
 
 
-        //Insert statement voor een insert in de database data is de te inserten data, tabel de tabel en velden de velden waar de data in moet. De data en velden moeten gescheiden worden door comma's
+        //Insert statement voor een insert. De database data is de te inserten data, tabel de tabel en velden de velden waar de data in moet. De data en velden moeten gescheiden worden door comma's
         public void Insert(string tabel, string data, string velden)
         {
             string query = "INSERT INTO " + tabel + " (" + velden + ") VALUES(" + data + ");";

@@ -35,14 +35,21 @@ namespace FileShare
         //De functie om een gebruiker een nieuwe categorie te laten aanmaken.
         public void CreeerCategorie(string naam, int parentID) 
         {
-            mainclass.Categorieen.Add(new Categorie(naam, parentID));
-            connectie.Insert("Categorie", naam+", "+parentNaam);
+            mainclass.AlleCategorieen.Add(new Categorie(naam, parentID));
+            // connectie.Insert("Categorie", naam + ", " + parentNaam);
         }
 
         //De functie om een stem te geven aan een bestand.
-        public void Vote(Boolean upvote) 
+        public void Vote(Boolean upvote, int bestandID) 
         {
-            Vote(mainclass.geselecteerdBestand.GetUserID(), mainclass.geselecteerdBestand.GetBestandID(), upvote);
+            string sUpvote = "Y";
+            if(!upvote) 
+            {
+                sUpvote = "N";
+            }
+
+            connectie.Delete("vote", "BezoekerID = '" + mainclass.GetFileByID(bestandID).GetUserID + "' AND BestandID = '" + bestandID + "'");
+            connectie.Insert("vote", String.Format("{0}, {1}, '{2}'", bestandID, mainclass.GetFileByID(bestandID).GetUserID, sUpvote), "BestandID, BezoekerID, Upvote");
         }
 
         //De functie om een bestand te uploaden.
@@ -51,22 +58,33 @@ namespace FileShare
         }
 
         //De functie om een categorie te verwijderen.
-        public void VerwijderCategorie() 
+        public void VerwijderCategorie(int id) 
         {
             if (this.admin == true) //Indien de gebruiker de admin is,
-            {//alle bestanden die alleen in deze categorie zitten en de categorie zelf verwijderen.
+            {
+                //alle bestanden die alleen in deze categorie zitten en de categorie zelf verwijderen.
+                foreach (File item in mainclass.AlleFiles)
+	            {
+		            if(item.CategorieIDs.Contains(id)) 
+                    {
+                        // TODO: Delete this file
+                    }
+	            }
+
+                /*
                 for (int i=0; i<mainclass.geselecteerdeCategorieBestanden.length; i++)
                 {
                     VerwijderBestand(mainclass.geselecteerdeCategorieBestanden[i], this.bezoekerID);
                 }
-                connectie.Delete("categorie", "categorieID="+geselecteerdeCategorie.GetCategorieID[]);
+                 * */
+                // connectie.Delete("categorie", "categorieID="+geselecteerdeCategorie.GetCategorieID);
             }
             else //Voor elke andere gebruiker,
             { //deze opdracht negeren
                 return;
             }
         }
-
+        /*
         //De functie om een bestand te verwijderen.
         public void VerwijderBestand(int bestandID) 
         {
@@ -79,5 +97,6 @@ namespace FileShare
                 return;
             }
         }
+         */
     }
 }
