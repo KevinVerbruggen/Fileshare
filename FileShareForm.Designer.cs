@@ -41,11 +41,9 @@
             // 
             // ListBoxBestanden
             // 
-            this.ListBoxBestanden.Location = new System.Drawing.Point(13, 13);
-            this.listBoxCategorie.FormattingEnabled = true;
-            this.listBoxCategorie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.ListBoxBestanden.Location = new System.Drawing.Point(13, 91);
             this.ListBoxBestanden.Name = "ListBoxBestanden";
-            this.ListBoxBestanden.Size = new System.Drawing.Size(555, 448);
+            this.ListBoxBestanden.Size = new System.Drawing.Size(555, 368);
             this.ListBoxBestanden.TabIndex = 0;
             this.ListBoxBestanden.SelectedIndexChanged += new System.EventHandler(this.ListBoxBestanden_SelectedIndexChanged);
             // 
@@ -145,6 +143,7 @@
             this.Controls.Add(this.ListBoxBestanden);
             this.Name = "FileShareForm";
             this.Text = "FileShare";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FileShareForm_FormClosing);
             this.ResumeLayout(false);
 
         }

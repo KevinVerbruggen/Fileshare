@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,8 @@ namespace FileShare
         //Benodigde variabelen.
         private int bezoekerID;
         private Boolean admin;
-        
+
+
         //Properties vaststellen
         public int BezoekerID
         {
@@ -31,6 +33,8 @@ namespace FileShare
             this.bezoekerID = bezoekerID;
             this.admin = admin;
         }
+
+
 
         //De functie om een gebruiker een nieuwe categorie te laten aanmaken.
         public void CreeerCategorie(string naam, int parentID) 

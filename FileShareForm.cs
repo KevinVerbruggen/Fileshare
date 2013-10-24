@@ -41,6 +41,7 @@ namespace FileShare
             {
                 int id = mainclass.AlleFiles[ListBoxBestanden.SelectedIndex].BestandID;
                 mainclass.localUser.Vote(true, id);
+                MessageBox.Show("Bestand is upvoted");
             }
         }
 
@@ -51,6 +52,7 @@ namespace FileShare
             {
                 int id = mainclass.AlleFiles[ListBoxBestanden.SelectedIndex].BestandID;
                 mainclass.localUser.Vote(false, id);
+                MessageBox.Show("Bestand is downvoted");
             }
         }
 
@@ -81,6 +83,11 @@ namespace FileShare
         private void buttonVerwijderen2_Click(object sender, EventArgs e)
         {
             // mainclass.localUser.VerwijderCategorie(mainclass.GetGeselecteerdeCategorieID);
+        }
+
+        private void FileShareForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

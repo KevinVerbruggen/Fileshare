@@ -118,12 +118,13 @@ namespace FileShare
                 Console.WriteLine(query);
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.ExecuteNonQuery();
+
                 this.CloseConnection();
             }
         }
 
 
-        //Insert statement voor een insert. De database data is de te inserten data, tabel de tabel en velden de velden waar de data in moet. De data en velden moeten gescheiden worden door comma's
+        //Insert statement voor een insert in de database data is de te inserten data, tabel de tabel en velden de velden waar de data in moet. De data en velden moeten gescheiden worden door comma's
         public void Insert(string tabel, string data, string velden)
         {
             string query = "INSERT INTO " + tabel + " (" + velden + ") VALUES(" + data + ");";
@@ -144,36 +145,29 @@ namespace FileShare
             ExecuteQuery(query);
         }
 
-        //Select statement
-        public string[] Select(string tabel, string velden, string waar = "1")
+        // Select statement
+        public DataRow SingleSelect(string tabel, string velden, string waar = "1")
         {
 
+            DataTable data = new DataTable();
             if (this.OpenConnection() == true)
             {
-                MySqlDataReader reader = null;
                 string query = "SELECT " + velden + " FROM " + tabel + " WHERE " + waar + ";";
-
-                string[] data = new string[(Count("`INFORMATION_SCHEMA`.`COLUMNS`", "`TABLE_SCHEMA`='" + database + "' AND `TABLE_NAME`='" + tabel + "'"))];
-                if (this.OpenConnection() == true)
-                {
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        for (int i = 0; i < (data.Length); i++)
-                        {
-
-                            data[i] = reader.GetString(i);
-
-                        }
-                        reader.Close();
-                        return data;
-                    }
-
-                }
-                this.CloseConnection();
+                Console.WriteLine(query);
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                data.Load(cmd.ExecuteReader());
             }
-            return null;
+
+            if (data.Rows.Count > 0)
+            {
+                DataRow rij = data.Rows[0];
+                return rij;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
 
@@ -184,6 +178,7 @@ namespace FileShare
             if (this.OpenConnection() == true)
             {
                 string query = "SELECT " + velden + " FROM " + tabel + " WHERE " + waar + ";";
+                Console.WriteLine(query);
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 data.Load(cmd.ExecuteReader());
             }
@@ -221,3 +216,4 @@ namespace FileShare
 
 
 }
+

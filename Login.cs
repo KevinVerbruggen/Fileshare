@@ -19,9 +19,26 @@ namespace FileShare
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FileShareForm f = new FileShareForm();
-            f.Show();
-            this.Hide();
+            if (tbGebruikersnaam.TextLength > 0 && tbWachtwoord.TextLength > 0)
+            {
+                DataRow inlog = DBconnect.Instantie.SingleSelect("account", "gebruikersnaam, wachtwoord", "gebruikersnaam = '" + tbGebruikersnaam.Text + "' AND wachtwoord = '" + tbWachtwoord.Text + "'");
+                if (inlog != null)
+                {
+                    FileShareForm f = new FileShareForm();
+                    f.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Onjuiste gebruikersnaam en/of wachtwoord\nProbeer het opnieuw");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Voer uw gebruikersnaam of wachtwoord in");
+            }
+
+            
         }
     }
 }
