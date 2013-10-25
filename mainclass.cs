@@ -125,7 +125,7 @@ namespace FileShare
             string bestandsnaam = System.IO.Path.GetFileName(uploadBestandLocatie);
             myComputer.FileSystem.CopyFile(uploadBestandLocatie, @"\\FILESHARE-SERVER\" + bestandID);
             connectie.Insert("Bestand", bestandsnaam + ", " + bestandID.ToString() + ", " + localUser.BezoekerID, "Naam, Locatie, bezoekerID");
-            AlleFiles.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
+            AlleFiles.Add(new File(Convert.ToInt32(AlleFiles.Count), Convert.ToString(Path.GetFileName(uploadBestandLocatie))), Convert.ToInt32(localUser.BezoekerID), Convert.ToString(uploadBestandLocatie));
             foreach (int i in categorieID)
             {
                 connectie.Insert("BestandCategorie", bestandID + ", " + i, "BestandID, CategorieID");
