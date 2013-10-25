@@ -13,7 +13,7 @@ namespace FileShare
         public static List<File> AlleFiles = new List<File>();
         public static List<File> EigenBestanden = new List<File>();
         public static List<File> GeFlagteBestanden = new List<File>();
-        public static List<File> AlleGebruikers = new List<File>();
+        public static List<User> AlleGebruikers = new List<User>();
         public static List<Categorie> AlleCategorieen = new List<Categorie>();
         private static DBconnect connectie = DBconnect.Instantie;
         public static User localUser;
@@ -24,11 +24,11 @@ namespace FileShare
             DataTable bestandenTabel;
             bestandenTabel = connectie.SelectMultiple("Bestand", "*");
             DataTable eigenBestandenTabel;
-            bestandenTabel = connectie.SelectMultiple("Bestand", "BezoekerID = ");
+            eigenBestandenTabel = connectie.SelectMultiple("Bestand", "*","BezoekerID = 0");
             DataTable geFlagteBestandenTabel;
-            bestandenTabel = connectie.SelectMultiple("Bestand", "*");
+            geFlagteBestandenTabel = connectie.SelectMultiple("Bestand as b", "*","(SELECT COUNT(*) FROM flag WHERE b.BestandID = BestandID)");
             DataTable alleGebruikersTabel;
-            bestandenTabel = connectie.SelectMultiple("account", "*");      
+            alleGebruikersTabel = connectie.SelectMultiple("account", "*");      
 
             DataTable categorienTabel;
             categorienTabel = connectie.SelectMultiple("Categorie", "*");
@@ -38,10 +38,17 @@ namespace FileShare
                 // TODO: Voeg categorieën toe aan een file ipv de new list.
                 AlleFiles.Add(new File(Int32.Parse(row["BestandID"].ToString()), row["Naam"].ToString(), new List<int>(), Int32.Parse(row["BezoekerID"].ToString())));
             }
+            foreach (DataRow row in eigenBestandenTabel.Rows)
+            {
+                EigenBestanden.Add(new File(Int32.Parse(row["BestandID"].ToString()), row["Naam"].ToString(), new List<int>(), Int32.Parse(row["BezoekerID"].ToString())));
+            }
             foreach (DataRow row in alleGebruikersTabel.Rows)
             {
-                // TODO: Voeg categorieën toe aan een file ipv de new list.
-                AlleFiles.Add(new File(Int32.Parse(row["BezoekerID"].ToString()), row["Gebruikersnaam"].ToString(),, I(row["BezoekerID"].ToString())));
+                AlleGebruikers.Add(new User(Int32.Parse(row["BezoekerID"].ToString()), row["Gebruikersnaam"].ToString(), row["Wachtwoord"].ToString(), row["soort"].ToString()));
+            }
+            foreach (DataRow row in geFlagteBestandenTabel.Rows)
+            {
+                GeFlagteBestanden.Add(new File(Int32.Parse(row["BestandID"].ToString()), row["Naam"].ToString(), new List<int>(), Int32.Parse(row["BezoekerID"].ToString())));
             }
 
         }

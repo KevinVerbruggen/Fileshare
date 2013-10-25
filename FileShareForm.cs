@@ -25,8 +25,7 @@ namespace FileShare
         {
             InitializeComponent();
             mainclass.InitialiseerApp();
-            if (labelIngelogdAls.Text.Contains("admin"))
-            // if (mainclass.localUser.Admin == true)
+            if (mainclass.localUser.Admin == true)
             {
                 tcAlleBestanden.TabPages.Remove(tabPage2);
             }
@@ -79,9 +78,16 @@ namespace FileShare
         {
             listBoxCategorie.Items.Clear();
             ListBoxBestanden.Items.Clear();
+            ListBoxEigenBestanden.Items.Clear();
+            ListBoxFlagBestanden.Items.Clear();
+            ListBoxAlleGebruikers.Items.Clear();
+
             //mainclass.vulTabellen();
             listBoxCategorie.Items.AddRange(mainclass.AlleCategorieen.ToArray());
             ListBoxBestanden.Items.AddRange(mainclass.AlleFiles.ToArray());
+            ListBoxEigenBestanden.Items.AddRange(mainclass.EigenBestanden.ToArray());
+            ListBoxAlleGebruikers.Items.AddRange(mainclass.AlleGebruikers.ToArray());
+            ListBoxFlagBestanden.Items.AddRange(mainclass.GeFlagteBestanden.ToArray());
         }
 
         private void buttonVerwijderen2_Click(object sender, EventArgs e)

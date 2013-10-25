@@ -12,8 +12,18 @@ namespace FileShare
         DBconnect connectie = DBconnect.Instantie;
         //Benodigde variabelen.
         private int bezoekerID;
+        private string gebruikersnaam;
+        private string wachtwoord;
+        private string soort;
         private Boolean admin;
 
+        public User(int bezoekerID, string gebruikersnaam, string wachtwoord, string soort)
+        {
+            this.bezoekerID = bezoekerID;
+            this.gebruikersnaam = gebruikersnaam;
+            this.wachtwoord = wachtwoord;
+            this.soort = soort;
+        }
 
         //Properties vaststellen
         public int BezoekerID
@@ -104,5 +114,10 @@ namespace FileShare
             }
         }
          */
+
+        public override string ToString()
+        {
+            return String.Format("ID: {0}, Naam: {1}, Wachtwoord: {2}, Soort account: {3} ", bezoekerID, gebruikersnaam, wachtwoord,soort);
+        }
     }
 }

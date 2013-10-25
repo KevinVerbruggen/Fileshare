@@ -31,16 +31,16 @@ namespace FileShare
                     }
                     else
                     {
-                        FileShareForm f = new FileShareForm();
-                        f.UserName = inlog["gebruikersnaam"].ToString();
-                        f.Show();
-                        this.Hide();
-
-
                         //Haal gegevens uit DataRow om localUser te vullen
                         bool soortAccount = (inlog["soort"].ToString() == "admin") ? true : false;
                         mainclass.localUser = new User((int)inlog["BezoekerID"], soortAccount);
                         mainclass.localUser.Admin = (inlog["soort"].ToString() == "admin") ? true : false;
+
+
+                        FileShareForm f = new FileShareForm();
+                        f.UserName = inlog["gebruikersnaam"].ToString();
+                        f.Show();
+                        this.Hide();
                     }
                 }
                 else
