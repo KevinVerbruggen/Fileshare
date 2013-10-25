@@ -20,10 +20,21 @@ namespace FileShare
             }
         }
 
+
         public FileShareForm()
         {
             InitializeComponent();
             mainclass.InitialiseerApp();
+            if (labelIngelogdAls.Text.Contains("admin"))
+            // if (mainclass.localUser.Admin == true)
+            {
+                tcAlleBestanden.TabPages.Remove(tabPage2);
+            }
+            else
+            {
+                tcAlleBestanden.TabPages.Remove(tabPage3);
+                tcAlleBestanden.TabPages.Remove(tabPage4);
+            }
 
             buttonVernieuwen_Click(null, null);
         }

@@ -191,7 +191,7 @@
             // 
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(457, 199);
+            this.tabPage4.Size = new System.Drawing.Size(550, 398);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Alle gebruikers";
             this.tabPage4.UseVisualStyleBackColor = true;

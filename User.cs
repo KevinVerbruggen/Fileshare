@@ -24,7 +24,8 @@ namespace FileShare
 
         public Boolean Admin
         {
-            get { return admin; }
+            set { admin = value; }
+            get { return admin;}
         }
 
 

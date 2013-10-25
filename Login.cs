@@ -40,6 +40,7 @@ namespace FileShare
                         //Haal gegevens uit DataRow om localUser te vullen
                         bool soortAccount = (inlog["soort"].ToString() == "admin") ? true : false;
                         mainclass.localUser = new User((int)inlog["BezoekerID"], soortAccount);
+                        mainclass.localUser.Admin = (inlog["soort"].ToString() == "admin") ? true : false;
                     }
                 }
                 else
