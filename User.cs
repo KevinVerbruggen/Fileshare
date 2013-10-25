@@ -17,14 +17,6 @@ namespace FileShare
         private string soort;
         private Boolean admin;
 
-        public User(int bezoekerID, string gebruikersnaam, string wachtwoord, string soort)
-        {
-            this.bezoekerID = bezoekerID;
-            this.gebruikersnaam = gebruikersnaam;
-            this.wachtwoord = wachtwoord;
-            this.soort = soort;
-        }
-
         //Properties vaststellen
         public int BezoekerID
         {
@@ -38,6 +30,12 @@ namespace FileShare
             get { return admin;}
         }
 
+        public string Gebruikersnaam
+        {
+            set { gebruikersnaam = value; }
+            get { return value; }
+        }
+
 
         //De constructor. Met deze functie worden de variabelen met de waardes van een huurder uit de database gevuld. 
         public User(int bezoekerID, Boolean admin)
@@ -46,13 +44,27 @@ namespace FileShare
             this.admin = admin;
         }
 
+        public User(int bezoekerID, string gebruikersnaam, string wachtwoord, string soort)
+        {
+            this.bezoekerID = bezoekerID;
+            this.gebruikersnaam = gebruikersnaam;
+            this.wachtwoord = wachtwoord;
+            this.soort = soort;
+        }
+
+
 
 
         //De functie om een gebruiker een nieuwe categorie te laten aanmaken.
         public void CreeerCategorie(string naam, int parentID) 
         {
-            mainclass.AlleCategorieen.Add(new Categorie(naam, parentID));
+            int? nullableParentID = parentID;
+            mainclass.AlleCategorieen.Add(new Categorie(naam, nullableParentID));
             // connectie.Insert("Categorie", naam + ", " + parentNaam);
+        }
+        public void CreeerCategorie(string naam)
+        {
+            mainclass.AlleCategorieen.Add(new Categorie(naam));
         }
 
         //De functie om een stem te geven aan een bestand.
@@ -68,13 +80,8 @@ namespace FileShare
             connectie.Insert("vote", String.Format("{0}, {1}, '{2}'", bestandID, mainclass.GetFileByID(bestandID).GetUserID, sUpvote), "BestandID, BezoekerID, Upvote");
         }
 
-        //De functie om een bestand te uploaden.
-        public void UploadFile() 
-        { 
-        }
-
         //De functie om een categorie te verwijderen.
-        public void VerwijderCategorie(int id) 
+        /* public void VerwijderCategorie(int id) 
         {
             if (this.admin == true) //Indien de gebruiker de admin is,
             {
@@ -87,34 +94,24 @@ namespace FileShare
                     }
 	            }
 
-                /*
+                
                 for (int i=0; i<mainclass.geselecteerdeCategorieBestanden.length; i++)
                 {
-                    VerwijderBestand(mainclass.geselecteerdeCategorieBestanden[i], this.bezoekerID);
+                    mainclass.VerwijderBestand(mainclass.geselecteerdeCategorieBestanden[i], this.bezoekerID);
                 }
-                 * */
-                // connectie.Delete("categorie", "categorieID="+geselecteerdeCategorie.GetCategorieID);
+                
+                connectie.Delete("categorie", "categorieID="+mainclass.geselecteerdeCategorie.GetCategorieID);
             }
             else //Voor elke andere gebruiker,
             { //deze opdracht negeren
                 return;
-            }
+            }*/
         }
-        /*
-        //De functie om een bestand te verwijderen.
-        public void VerwijderBestand(int bestandID) 
-        {
-            if (this.bezoekerID == mainclass.GetGeselecteerdBestandUploaderID && this.admin == true) //Als de gebruiker de uploader of admin is,
-            { //dan het bestand verwijderen.
-                mainclass.VerwijderBestand(bestandID);
-            }
-            else //Als dit wel niet geval is,
-            { //het bestand niet verwijderen.
-                return;
-            }
-        }
-         */
 
+        public void Rapporteren(int bestandID)
+        {
+            connectie.Insert("Flag", bestandID + ", " + bezoekerID, "bestandID, bezoekerID");
+        }
         public override string ToString()
         {
             return String.Format("ID: {0}, Naam: {1}, Wachtwoord: {2}, Soort account: {3} ", bezoekerID, gebruikersnaam, wachtwoord,soort);

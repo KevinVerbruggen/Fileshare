@@ -13,7 +13,7 @@ namespace FileShare
     public partial class FileShareForm : Form
     {
         public string uploadBestandLocatie;
-
+        
         public string UserName
         {
             set 
@@ -21,7 +21,6 @@ namespace FileShare
                 labelIngelogdAls.Text = "Ingelogd als: " + value;
             }
         }
-
 
         public FileShareForm()
         {
@@ -39,11 +38,19 @@ namespace FileShare
             }
             foreach (File bestand in mainclass.AlleFiles)
             {
-                ListBoxBestanden.Items.Add(bestand.naam);
+                ListBoxBestanden.Items.Add(bestand.Naam);
             }
             foreach (Categorie categorie in mainclass.AlleCategorieen)
             {
                 listBoxCategorie.Items.Add(categorie.naam);
+            }
+            foreach (File bestand in mainclass.EigenBestanden)
+            {
+                ListBoxEigenBestanden.Items.Add(bestand.Naam);
+            }
+            foreach (File bestand in mainclass.GeFlagteBestanden)
+            {
+                ListBoxFlagBestanden.Items.Add(bestand.Naam);
             }
 
             buttonVernieuwen_Click(null, null);
@@ -92,7 +99,7 @@ namespace FileShare
 
         private void buttonVerwijder_Click(object sender, EventArgs e)
         {
-            mainclass.localUser.VerwijderBestand(ListBoxBestanden.SelectedItems[0]);
+            mainclass.localUser.VerwijderBestand(ListBoxBestanden.SelectedItems[0], mainclass.localUser.BezoekerID);
         }
 
         private void buttonVernieuwen_Click(object sender, EventArgs e)
@@ -119,7 +126,7 @@ namespace FileShare
             if (ListBoxBestanden.SelectedItems.Count > 0)
             {
                 int id = mainclass.AlleFiles[ListBoxBestanden.SelectedIndex].BestandID;
-                mainclass.localUser.Flag(id);
+                mainclass.localUser.Rapporteren(id);
                 MessageBox.Show("Bestand is downvoted");
             }
         }

@@ -36,3 +36,4 @@ C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.FileShareForm.resour
 C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.Login.resources
 C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.Properties.Resources.resources
 C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.csproj.GenerateResource.Cache
+C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.FormBestandZichtbaarheid.resources

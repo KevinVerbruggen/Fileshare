@@ -41,11 +41,12 @@
             this.tcAlleBestanden = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.ListBoxEigenBestanden = new System.Windows.Forms.ListBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.ListBoxFlagBestanden = new System.Windows.Forms.ListBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.ListBoxAlleGebruikers = new System.Windows.Forms.ListBox();
+            this.buttonFlag = new System.Windows.Forms.Button();
             this.tcAlleBestanden.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -74,7 +75,7 @@
             // 
             // buttonVerwijder
             // 
-            this.buttonVerwijder.Location = new System.Drawing.Point(591, 199);
+            this.buttonVerwijder.Location = new System.Drawing.Point(591, 221);
             this.buttonVerwijder.Name = "buttonVerwijder";
             this.buttonVerwijder.Size = new System.Drawing.Size(185, 31);
             this.buttonVerwijder.TabIndex = 2;
@@ -86,7 +87,7 @@
             // 
             this.buttonUpvote.Location = new System.Drawing.Point(591, 111);
             this.buttonUpvote.Name = "buttonUpvote";
-            this.buttonUpvote.Size = new System.Drawing.Size(185, 31);
+            this.buttonUpvote.Size = new System.Drawing.Size(92, 31);
             this.buttonUpvote.TabIndex = 4;
             this.buttonUpvote.Text = "Upvote";
             this.buttonUpvote.UseVisualStyleBackColor = true;
@@ -94,9 +95,9 @@
             // 
             // buttonDownvote
             // 
-            this.buttonDownvote.Location = new System.Drawing.Point(591, 148);
+            this.buttonDownvote.Location = new System.Drawing.Point(689, 111);
             this.buttonDownvote.Name = "buttonDownvote";
-            this.buttonDownvote.Size = new System.Drawing.Size(185, 31);
+            this.buttonDownvote.Size = new System.Drawing.Size(87, 31);
             this.buttonDownvote.TabIndex = 5;
             this.buttonDownvote.Text = "Downvote";
             this.buttonDownvote.UseVisualStyleBackColor = true;
@@ -123,7 +124,7 @@
             // 
             // buttonVernieuwen
             // 
-            this.buttonVernieuwen.Location = new System.Drawing.Point(591, 284);
+            this.buttonVernieuwen.Location = new System.Drawing.Point(591, 295);
             this.buttonVernieuwen.Name = "buttonVernieuwen";
             this.buttonVernieuwen.Size = new System.Drawing.Size(185, 31);
             this.buttonVernieuwen.TabIndex = 8;
@@ -133,7 +134,7 @@
             // 
             // buttonVerwijderen2
             // 
-            this.buttonVerwijderen2.Location = new System.Drawing.Point(591, 236);
+            this.buttonVerwijderen2.Location = new System.Drawing.Point(591, 258);
             this.buttonVerwijderen2.Name = "buttonVerwijderen2";
             this.buttonVerwijderen2.Size = new System.Drawing.Size(185, 31);
             this.buttonVerwijderen2.TabIndex = 9;
@@ -184,6 +185,15 @@
             this.tabPage2.Text = "Eigen bestanden";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // ListBoxEigenBestanden
+            // 
+            this.ListBoxEigenBestanden.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListBoxEigenBestanden.FormattingEnabled = true;
+            this.ListBoxEigenBestanden.Location = new System.Drawing.Point(3, 3);
+            this.ListBoxEigenBestanden.Name = "ListBoxEigenBestanden";
+            this.ListBoxEigenBestanden.Size = new System.Drawing.Size(544, 392);
+            this.ListBoxEigenBestanden.TabIndex = 0;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.ListBoxFlagBestanden);
@@ -195,6 +205,15 @@
             this.tabPage3.Text = "Geflagte bestanden";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // ListBoxFlagBestanden
+            // 
+            this.ListBoxFlagBestanden.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListBoxFlagBestanden.FormattingEnabled = true;
+            this.ListBoxFlagBestanden.Location = new System.Drawing.Point(3, 3);
+            this.ListBoxFlagBestanden.Name = "ListBoxFlagBestanden";
+            this.ListBoxFlagBestanden.Size = new System.Drawing.Size(544, 392);
+            this.ListBoxFlagBestanden.TabIndex = 0;
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.ListBoxAlleGebruikers);
@@ -205,24 +224,6 @@
             this.tabPage4.Text = "Alle gebruikers";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // ListBoxEigenBestanden
-            // 
-            this.ListBoxEigenBestanden.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ListBoxEigenBestanden.FormattingEnabled = true;
-            this.ListBoxEigenBestanden.Location = new System.Drawing.Point(3, 3);
-            this.ListBoxEigenBestanden.Name = "ListBoxEigenBestanden";
-            this.ListBoxEigenBestanden.Size = new System.Drawing.Size(544, 392);
-            this.ListBoxEigenBestanden.TabIndex = 0;
-            // 
-            // ListBoxFlagBestanden
-            // 
-            this.ListBoxFlagBestanden.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ListBoxFlagBestanden.FormattingEnabled = true;
-            this.ListBoxFlagBestanden.Location = new System.Drawing.Point(3, 3);
-            this.ListBoxFlagBestanden.Name = "ListBoxFlagBestanden";
-            this.ListBoxFlagBestanden.Size = new System.Drawing.Size(544, 392);
-            this.ListBoxFlagBestanden.TabIndex = 0;
-            // 
             // ListBoxAlleGebruikers
             // 
             this.ListBoxAlleGebruikers.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -232,11 +233,21 @@
             this.ListBoxAlleGebruikers.Size = new System.Drawing.Size(550, 398);
             this.ListBoxAlleGebruikers.TabIndex = 0;
             // 
+            // buttonFlag
+            // 
+            this.buttonFlag.Location = new System.Drawing.Point(591, 148);
+            this.buttonFlag.Name = "buttonFlag";
+            this.buttonFlag.Size = new System.Drawing.Size(185, 31);
+            this.buttonFlag.TabIndex = 12;
+            this.buttonFlag.Text = "Rapporteren";
+            this.buttonFlag.UseVisualStyleBackColor = true;
+            // 
             // FileShareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 491);
+            this.Controls.Add(this.buttonFlag);
             this.Controls.Add(this.tcAlleBestanden);
             this.Controls.Add(this.labelIngelogdAls);
             this.Controls.Add(this.buttonVerwijderen2);
@@ -280,6 +291,7 @@
         private System.Windows.Forms.ListBox ListBoxEigenBestanden;
         private System.Windows.Forms.ListBox ListBoxFlagBestanden;
         private System.Windows.Forms.ListBox ListBoxAlleGebruikers;
+        private System.Windows.Forms.Button buttonFlag;
     }
 }
 

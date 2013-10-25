@@ -23,7 +23,7 @@ namespace FileShare
         private static Computer myComputer = new Computer();
         public static User localUser;
 
-        public int GetGeselecteerdBestandID = form.ListBoxBestanden.SelectedItems[0];
+        public int GetGeselecteerdBestandID = FileShareForm.ListBoxBestanden.SelectedItems[0];
         public List<int> GetGeselecteerdeCategorieID;
 
         public static void InitialiseerApp()
@@ -32,11 +32,11 @@ namespace FileShare
             DataTable bestandenTabel;
             bestandenTabel = connectie.SelectMultiple("Bestand", "*");
             DataTable eigenBestandenTabel;
-            bestandenTabel = connectie.SelectMultiple("Bestand", "*", "BezoekerID = ");
+            eigenBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BezoekerID = ");
             DataTable geFlagteBestandenTabel;
-            bestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT DISTINCT(BestandID) FROM Flags)");
+            geFlagteBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT DISTINCT(BestandID) FROM Flags)");
             DataTable alleGebruikersTabel;
-            bestandenTabel = connectie.SelectMultiple("account", "*");      
+            alleGebruikersTabel = connectie.SelectMultiple("account", "*");      
 
             DataTable categorienTabel;
             categorienTabel = connectie.SelectMultiple("Categorie", "*");
@@ -102,15 +102,15 @@ namespace FileShare
 
         public void VerwijderBestand(int bestandID, int userID){
             List<File> shortList = AlleFiles.Where(o => o.BestandID == bestandID).ToList();
-            if (shortList.Count > 0 && (localUser.Admin == true || bestand.uploaderID == GetGeselecteerdBestandUploaderID))
+            File f = shortList[0];
+            if (shortList.Count > 0 && (localUser.Admin == true || f.BezoekerID == GetGeselecteerdBestandUploaderID))
             {
                 connectie.Delete("BestandZichtbaarheid", "BestandID = " + bestandID);
                 connectie.Delete("Vote", "BestandID = " + bestandID);
                 connectie.Delete("Flag", "BestandID = " + bestandID);
                 connectie.Delete("Bestand_Categorie", "BestandID = " + bestandID);
 
-                File f = shortList[0];
-                My.Computer.FileSystem.DeleteFile(@"\\FILESHARE-SERVER\" + f.GetLocatie, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
+                myComputer.FileSystem.DeleteFile(@"\\FILESHARE-SERVER\" + f.GetLocatie, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
                 connectie.Delete("Bestand", "BestandID = " + bestandID);
             }
             else
@@ -119,16 +119,20 @@ namespace FileShare
             }
         }
 
-        public void UploadBestand(string uploadBestandLocatie, List<int> categorieID)
+        public void UploadBestand(string uploadBestandLocatie, List<int> categorieID, List<int> bestandZichtbaarheid)
         {
             int bestandID = GetMaxBestandID() + 1;
             string bestandsnaam = System.IO.Path.GetFileName(uploadBestandLocatie);
             myComputer.FileSystem.CopyFile(uploadBestandLocatie, @"\\FILESHARE-SERVER\" + bestandID);
             connectie.Insert("Bestand", bestandsnaam + ", " + bestandID.ToString() + ", " + localUser.BezoekerID.get(), "Naam, Locatie, bezoekerID");
-            mainclass.bestandenTabel.Rows.Add(bestandsnaam, bestandID, localUser.BezoekerID.get());
+            AlleFiles.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
             foreach (int i in categorieID)
             {
                 connectie.Insert("BestandCategorie", bestandID + ", " + i, "BestandID, CategorieID");
+            }
+            foreach (int i in bestandZichtbaarheid)
+            {
+                connectie.Insert("BestandZichtbaarheid", bestandID + ", " + i, "BestandID, bezoekerID");
             }
         }
 

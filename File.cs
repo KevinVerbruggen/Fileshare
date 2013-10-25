@@ -11,25 +11,34 @@ namespace FileShare
         //Alle variabelen.
         private int bestandID;
         private string naam;
-        private List<int> categorieIDs;
         private int bezoekerID;
         private string locatie;
 
+        public string Naam
+        {
+            set { naam = value; }
+            get { return naam; }
+        }
+
+        public int BezoekerID
+        {
+            set { bezoekerID = value; }
+            get { return bezoekerID; }
+        }
+
         //De constructor voor een nieuwe bestand.
-        public File(int bestandID, string naam, List<int> CategorieIDs, int bezoekerID)
+        public File(int bestandID, string naam, int bezoekerID)
         {
             this.bestandID = bestandID;
             this.naam = naam;
-            this.categorieIDs = CategorieIDs;
             this.bezoekerID = bezoekerID;
         }
 
         //De constructor voor een al bestaand bestand.
-        public File(int bestandID, string naam, List<int> CategorieIDs, int bezoekerID, string locatie)
+        public File(int bestandID, string naam, int bezoekerID, string locatie)
         {
             this.bestandID = bestandID;
             this.naam = naam;
-            this.categorieIDs = CategorieIDs;
             this.bezoekerID = bezoekerID;
             this.locatie = locatie;
         }
@@ -47,11 +56,6 @@ namespace FileShare
         public int GetUserID
         {
             get { return bezoekerID; }
-        }
-
-        public List<int> CategorieIDs
-        {
-            get { return categorieIDs; }
         }
 
         public override string ToString()

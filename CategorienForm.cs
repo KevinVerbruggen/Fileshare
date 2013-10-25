@@ -13,6 +13,7 @@ namespace FileShare
     public partial class CategorienForm : Form
     {
         string uploadBestandLocatie;
+        List<int> bestandZichtbaarheid;
 
         public CategorienForm(string uploadBestandLocatie)
         {
@@ -20,7 +21,7 @@ namespace FileShare
             this.uploadBestandLocatie = uploadBestandLocatie;
             foreach (Categorie categorie in mainclass.AlleCategorieen)
             {
-                checkedListBoxCategorien.ObjectCollection.Add(categorie.naam, false);
+                checkedListBoxCategorien.Items.Add(categorie.naam, false);
             }
         }
 
@@ -31,12 +32,12 @@ namespace FileShare
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (checkedListBoxCategorien.CheckedItems.Count() > 0)
+            if (checkedListBoxCategorien.CheckedItems.Count > 0)
             {
-                mainclass.UploadBestand(uploadBestandLocatie, checkedListBoxCategorien.CheckedIndices);
-                this.Close;
+                FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(uploadBestandLocatie, checkedListBoxCategorien.CheckedIndices);
+                this.Close();
             }
-            else if (checkedListBoxCategorien.CheckedItems.Count() == 0)
+            else if (checkedListBoxCategorien.CheckedItems.Count == 0)
             {
                 MessageBox.Show("Je hebt geen categoriën geselecteerd.");
             }
@@ -45,26 +46,26 @@ namespace FileShare
                 DialogResult doorgaanYN = MessageBox.Show("Je hebt meer dan 1 categorie geselecteerd. Weet je zeker dat je wilt doorgaan?", "Weet je het zeker?", MessageBoxButtons.YesNo);
                 if (doorgaanYN == DialogResult.Yes) 
                 {
-                    mainclass.UploadBestand(uploadBestandLocatie, checkedListBoxCategorien.CheckedIndices);
-                    this.Close;
+                    FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(uploadBestandLocatie, checkedListBoxCategorien.CheckedIndices);
+                this.Close();
                 }
             }
+            
         }
 
         private void buttonAnnuleren_Click(object sender, EventArgs e)
         {
             return;
-            this.Close;
         }
 
         private void buttonNieuweCategorie_Click(object sender, EventArgs e)
         {
-            if (checkedListBoxCategorien.CheckedItems.Count() == 1)
+            if (checkedListBoxCategorien.CheckedItems.Count == 1)
             {
-                mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie, this.checkedListBoxCategorien.CheckedIndices);
+                mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text, this.checkedListBoxCategorien.CheckedIndices);
             }
             else {
-                mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie, "");
+                mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
             }
 
         }
