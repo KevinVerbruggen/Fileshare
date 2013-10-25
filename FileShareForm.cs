@@ -99,7 +99,7 @@ namespace FileShare
 
         private void buttonVerwijder_Click(object sender, EventArgs e)
         {
-            mainclass.localUser.VerwijderBestand(ListBoxBestanden.SelectedItems[0], mainclass.localUser.BezoekerID);
+            mainclass.VerwijderBestand(ListBoxBestanden.SelectedItems[0], mainclass.localUser.BezoekerID);
         }
 
         private void buttonVernieuwen_Click(object sender, EventArgs e)
