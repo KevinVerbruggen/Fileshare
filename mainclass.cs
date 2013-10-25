@@ -11,6 +11,9 @@ namespace FileShare
     class mainclass
     {
         public static List<File> AlleFiles = new List<File>();
+        public static List<File> EigenBestanden = new List<File>();
+        public static List<File> GeFlagteBestanden = new List<File>();
+        public static List<File> AlleGebruikers = new List<File>();
         public static List<Categorie> AlleCategorieen = new List<Categorie>();
         private static DBconnect connectie = DBconnect.Instantie;
         public static User localUser;
@@ -20,6 +23,13 @@ namespace FileShare
             //hier worden alle datatables aangemaakt en gevuld
             DataTable bestandenTabel;
             bestandenTabel = connectie.SelectMultiple("Bestand", "*");
+            DataTable eigenBestandenTabel;
+            bestandenTabel = connectie.SelectMultiple("Bestand", "BezoekerID = ");
+            DataTable geFlagteBestandenTabel;
+            bestandenTabel = connectie.SelectMultiple("Bestand", "*");
+            DataTable alleGebruikersTabel;
+            bestandenTabel = connectie.SelectMultiple("account", "*");      
+
             DataTable categorienTabel;
             categorienTabel = connectie.SelectMultiple("Categorie", "*");
 
@@ -28,6 +38,12 @@ namespace FileShare
                 // TODO: Voeg categorieën toe aan een file ipv de new list.
                 AlleFiles.Add(new File(Int32.Parse(row["BestandID"].ToString()), row["Naam"].ToString(), new List<int>(), Int32.Parse(row["BezoekerID"].ToString())));
             }
+            foreach (DataRow row in alleGebruikersTabel.Rows)
+            {
+                // TODO: Voeg categorieën toe aan een file ipv de new list.
+                AlleFiles.Add(new File(Int32.Parse(row["BezoekerID"].ToString()), row["Gebruikersnaam"].ToString(),, I(row["BezoekerID"].ToString())));
+            }
+
         }
 
 

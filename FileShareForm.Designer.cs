@@ -43,8 +43,14 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.ListBoxEigenBestanden = new System.Windows.Forms.ListBox();
+            this.ListBoxFlagBestanden = new System.Windows.Forms.ListBox();
+            this.ListBoxAlleGebruikers = new System.Windows.Forms.ListBox();
             this.tcAlleBestanden.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // ListBoxBestanden
@@ -169,6 +175,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.ListBoxEigenBestanden);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -179,6 +186,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.ListBoxFlagBestanden);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -189,12 +197,40 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.ListBoxAlleGebruikers);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(550, 398);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Alle gebruikers";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // ListBoxEigenBestanden
+            // 
+            this.ListBoxEigenBestanden.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListBoxEigenBestanden.FormattingEnabled = true;
+            this.ListBoxEigenBestanden.Location = new System.Drawing.Point(3, 3);
+            this.ListBoxEigenBestanden.Name = "ListBoxEigenBestanden";
+            this.ListBoxEigenBestanden.Size = new System.Drawing.Size(544, 392);
+            this.ListBoxEigenBestanden.TabIndex = 0;
+            // 
+            // ListBoxFlagBestanden
+            // 
+            this.ListBoxFlagBestanden.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListBoxFlagBestanden.FormattingEnabled = true;
+            this.ListBoxFlagBestanden.Location = new System.Drawing.Point(3, 3);
+            this.ListBoxFlagBestanden.Name = "ListBoxFlagBestanden";
+            this.ListBoxFlagBestanden.Size = new System.Drawing.Size(544, 392);
+            this.ListBoxFlagBestanden.TabIndex = 0;
+            // 
+            // ListBoxAlleGebruikers
+            // 
+            this.ListBoxAlleGebruikers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListBoxAlleGebruikers.FormattingEnabled = true;
+            this.ListBoxAlleGebruikers.Location = new System.Drawing.Point(0, 0);
+            this.ListBoxAlleGebruikers.Name = "ListBoxAlleGebruikers";
+            this.ListBoxAlleGebruikers.Size = new System.Drawing.Size(550, 398);
+            this.ListBoxAlleGebruikers.TabIndex = 0;
             // 
             // FileShareForm
             // 
@@ -216,6 +252,9 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FileShareForm_FormClosing);
             this.tcAlleBestanden.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,6 +277,9 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ListBox ListBoxEigenBestanden;
+        private System.Windows.Forms.ListBox ListBoxFlagBestanden;
+        private System.Windows.Forms.ListBox ListBoxAlleGebruikers;
     }
 }
 
