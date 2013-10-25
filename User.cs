@@ -33,7 +33,7 @@ namespace FileShare
         public string Gebruikersnaam
         {
             set { gebruikersnaam = value; }
-            get { return value; }
+            get { return gebruikersnaam; }
         }
 
 
@@ -105,8 +105,8 @@ namespace FileShare
             else //Voor elke andere gebruiker,
             { //deze opdracht negeren
                 return;
-            }*/
-        }
+            }
+        }*/
 
         public void Rapporteren(int bestandID)
         {

@@ -18,7 +18,7 @@ namespace FileShare
         public FormBestandZichtbaarheid(string uploadBestandLocatie, CheckedListBox.CheckedIndexCollection categorien)
         {
             InitializeComponent();
-            checkedListBoxZichtbaarheid.Items.Add(mainclass.localUser.bezoekersID, true);
+            checkedListBoxZichtbaarheid.Items.Add(mainclass.localUser.BezoekerID, true);
             foreach (User bezoeker in mainclass.AlleGebruikers)
             {
                 checkedListBoxZichtbaarheid.Items.Add(bezoeker.Gebruikersnaam, false);
