@@ -37,10 +37,7 @@
             this.listBoxCategorie = new System.Windows.Forms.ListBox();
             this.buttonVernieuwen = new System.Windows.Forms.Button();
             this.buttonVerwijderen2 = new System.Windows.Forms.Button();
-            if (mainclass.localUser.Admin == true)
-            {
-                this.buttonFlags = new System.Windows.Forms.Button();
-            }
+            this.buttonFlags = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewBestanden
