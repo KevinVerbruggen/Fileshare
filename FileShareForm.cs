@@ -26,16 +26,7 @@ namespace FileShare
         {
             InitializeComponent();
             mainclass.InitialiseerApp();
-            if (labelIngelogdAls.Text.Contains("admin"))
-            if (mainclass.localUser.Admin == true)
-            {
-                tcAlleBestanden.TabPages.Remove(tabPage2);
-            }
-            else
-            {
-                tcAlleBestanden.TabPages.Remove(tabPage3);
-                tcAlleBestanden.TabPages.Remove(tabPage4);
-            }
+
             foreach (File bestand in mainclass.AlleFiles)
             {
                 ListBoxBestanden.Items.Add(bestand.Naam);
@@ -51,6 +42,17 @@ namespace FileShare
             foreach (File bestand in mainclass.GeFlagteBestanden)
             {
                 ListBoxFlagBestanden.Items.Add(bestand.Naam);
+            }
+
+            if (labelIngelogdAls.Text.Contains("admin"))
+            if (mainclass.localUser.Admin == true)
+            {
+                tcAlleBestanden.TabPages.Remove(tabPage2);
+            }
+            else
+            {
+                tcAlleBestanden.TabPages.Remove(tabPage3);
+                tcAlleBestanden.TabPages.Remove(tabPage4);
             }
 
             buttonVernieuwen_Click(null, null);
