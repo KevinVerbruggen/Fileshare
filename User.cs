@@ -59,7 +59,7 @@ namespace FileShare
                 {
                     VerwijderBestand(mainclass.geselecteerdeCategorieBestanden[i], this.bezoekerID);
                 }
-                connectie.Delete("categorie", "categorieID="+geselecteerdeCategorie.GetCategorieID[]);
+                connectie.Delete("categorie", "categorieID="+mainclass.GetGeselecteerdeCategorieID);
             }
             else //Voor elke andere gebruiker,
             { //deze opdracht negeren
@@ -70,7 +70,7 @@ namespace FileShare
         //De functie om een bestand te verwijderen.
         public void VerwijderBestand(int bestandID) 
         {
-            if (this.bezoekerID == mainclass.GetGeselecteerdBestandUploaderID && this.admin == true) //Als de gebruiker de uploader of admin is,
+            if (this.bezoekerID == mainclass.GetGeselecteerdBestandUploaderID() && this.admin == true) //Als de gebruiker de uploader of admin is,
             { //dan het bestand verwijderen.
                 mainclass.VerwijderBestand(bestandID);
             }

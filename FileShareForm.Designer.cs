@@ -37,6 +37,10 @@
             this.listBoxCategorie = new System.Windows.Forms.ListBox();
             this.buttonVernieuwen = new System.Windows.Forms.Button();
             this.buttonVerwijderen2 = new System.Windows.Forms.Button();
+            if (mainclass.localUser.Admin == true)
+            {
+                this.buttonFlags = new System.Windows.Forms.Button();
+            }
             this.SuspendLayout();
             // 
             // listViewBestanden
@@ -128,11 +132,22 @@
             this.buttonVerwijderen2.UseVisualStyleBackColor = true;
             this.buttonVerwijderen2.Click += new System.EventHandler(this.buttonVerwijderen2_Click);
             // 
+            // buttonFlags
+            // 
+            this.buttonFlags.Location = new System.Drawing.Point(514, 437);
+            this.buttonFlags.Name = "buttonFlags";
+            this.buttonFlags.Size = new System.Drawing.Size(54, 24);
+            this.buttonFlags.TabIndex = 10;
+            this.buttonFlags.Text = "flags";
+            this.buttonFlags.UseVisualStyleBackColor = true;
+            this.buttonFlags.Click += new System.EventHandler(this.buttonFlags_Click);
+            // 
             // FileShareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 473);
+            this.Controls.Add(this.buttonFlags);
             this.Controls.Add(this.buttonVerwijderen2);
             this.Controls.Add(this.buttonVernieuwen);
             this.Controls.Add(this.listBoxCategorie);
@@ -159,6 +174,7 @@
         private System.Windows.Forms.ListBox listBoxCategorie;
         private System.Windows.Forms.Button buttonVernieuwen;
         private System.Windows.Forms.Button buttonVerwijderen2;
+        private System.Windows.Forms.Button buttonFlags;
     }
 }
 

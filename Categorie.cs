@@ -13,13 +13,13 @@ namespace FileShare
         public int parentID;
         private List<File> Files = new List<File>();
 
-        public void Categorie(string naam, int parentID)
+        public Categorie(string naam, int parentID)
         { 
             this.naam = naam;
             this.parentID = parentID;
         }
 
-        public void Categorie(int categorieID, string naam, int parentID)
+        public Categorie(int categorieID, string naam, int parentID)
         {
             this.categorieID = categorieID;
             this.naam = naam;

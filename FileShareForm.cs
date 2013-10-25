@@ -12,19 +12,26 @@ namespace FileShare
 {
     public partial class FileShareForm : Form
     {
+        bool showFlags = false;
+        public string uploadBestandLocatie;
+
         public FileShareForm()
         {
             InitializeComponent();
             mainclass.InitialiseerApp();
             foreach (File bestand in mainclass.AlleFiles)
             {
-                listViewBestanden.Items.Add(bestand.naam);
+ 
+            }
+            foreach (Categorie categorie in mainclass.AlleCategorieen)
+            {
+                listBoxCategorie.Items.Add(categorie.naam);
             }
         }
 
         private void buttonUploaden_Click(object sender, EventArgs e)
         {
-            string uploadBestandLocatie = "";
+            uploadBestandLocatie = "";
             OpenFileDialog kiesBestandDialog = new OpenFileDialog();
             kiesBestandDialog.Filter = "Text Files (.txt)|*.txt|Microsoft Word-bestanden (.doc, .docx)|*.doc, *.docx|Afbeeldingen (.jpg, .png, .bmp, .tif)|*.jpg, *.jpeg, *.png, *.bmp, *.dip, *.tif, *.tiff|Alle Bestanden (*.*)|*.*";
             kiesBestandDialog.Multiselect = false;
@@ -34,13 +41,13 @@ namespace FileShare
             }
             if (uploadBestandLocatie != "")
             {
-                mainclass.UploadBestand(uploadBestandLocatie);
+                CategorienForm kiesCategorienForm = new CategorienForm(uploadBestandLocatie);
             }
         }
 
         private void buttonDownloaden_Click(object sender, EventArgs e)
         {
-
+            mainclass.DownloadBestand(mainclass.GetGeselecteerdBestandID);
         }
 
         private void buttonUpvote_Click(object sender, EventArgs e)
@@ -60,12 +67,12 @@ namespace FileShare
 
         private void listBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            mainclass.GetGeselecteerdeCategorieID = Convert.ToInt32(listBoxCategorie.SelectedItems);
         }
 
         private void listViewBestanden_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            mainclass.GetGeselecteerdBestandID = Convert.ToInt32(listViewBestanden.SelectedItems[0]);
         }
 
         private void buttonVernieuwen_Click(object sender, EventArgs e)
@@ -74,14 +81,28 @@ namespace FileShare
             this.listViewBestanden.Items.Clear();
             mainclass.bestandenTabel.clear();
             mainclass.categorienTabel.clear();
-            //mainclass.vulTabellen();
             this.listBoxCategorie.Items.AddRange(mainclass.GetCategorieenLijst());
             this.listViewBestanden.Items.AddRange(mainclass.GetBestandenLijst());
         }
 
         private void buttonVerwijderen2_Click(object sender, EventArgs e)
         {
-            mainclass.localUser.VerwijderCategorie(mainclass.GetGeselecteerdeCategorieID);
+            foreach (int i in mainclass.GetGeselecteerdeCategorieID)
+            {
+                mainclass.localUser.VerwijderCategorie(i);
+            }
+        }
+
+        private void buttonFlags_Click(object sender, EventArgs e)
+        {
+            if (showFlags == false)
+            {
+                showFlags = true;
+            }
+            else 
+            {
+                showFlags = false;
+            }
         }
     }
 }
