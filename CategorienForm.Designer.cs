@@ -28,61 +28,83 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBoxCategorien = new System.Windows.Forms.ListBox();
+            this.buttonNieuweCategorie = new System.Windows.Forms.Button();
+            this.buttonOK = new System.Windows.Forms.Button();
+            this.buttonAnnuleren = new System.Windows.Forms.Button();
             this.textBoxNieuweCategorie = new System.Windows.Forms.TextBox();
-            this.buttonAccepteer = new System.Windows.Forms.Button();
-            this.buttonCategorieToevoegen = new System.Windows.Forms.Button();
+            this.labelUitleg = new System.Windows.Forms.Label();
+            this.checkedListBoxCategorien = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
-            // listBoxCategorien
+            // buttonNieuweCategorie
             // 
-            this.listBoxCategorien.FormattingEnabled = true;
-            this.listBoxCategorien.Location = new System.Drawing.Point(13, 13);
-            this.listBoxCategorien.Name = "listBoxCategorien";
-            this.listBoxCategorien.Size = new System.Drawing.Size(259, 147);
-            this.listBoxCategorien.TabIndex = 0;
-            this.listBoxCategorien.SelectedIndexChanged += new System.EventHandler(this.listBoxCategorien_SelectedIndexChanged);
+            this.buttonNieuweCategorie.Location = new System.Drawing.Point(177, 204);
+            this.buttonNieuweCategorie.Name = "buttonNieuweCategorie";
+            this.buttonNieuweCategorie.Size = new System.Drawing.Size(89, 23);
+            this.buttonNieuweCategorie.TabIndex = 2;
+            this.buttonNieuweCategorie.Text = "Toevoegen";
+            this.buttonNieuweCategorie.UseVisualStyleBackColor = true;
+            this.buttonNieuweCategorie.Click += new System.EventHandler(this.buttonNieuweCategorie_Click);
+            // 
+            // buttonOK
+            // 
+            this.buttonOK.Location = new System.Drawing.Point(12, 233);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.TabIndex = 3;
+            this.buttonOK.Text = "OK";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            // 
+            // buttonAnnuleren
+            // 
+            this.buttonAnnuleren.Location = new System.Drawing.Point(93, 233);
+            this.buttonAnnuleren.Name = "buttonAnnuleren";
+            this.buttonAnnuleren.Size = new System.Drawing.Size(75, 23);
+            this.buttonAnnuleren.TabIndex = 4;
+            this.buttonAnnuleren.Text = "Annuleren";
+            this.buttonAnnuleren.UseVisualStyleBackColor = true;
+            this.buttonAnnuleren.Click += new System.EventHandler(this.buttonAnnuleren_Click);
             // 
             // textBoxNieuweCategorie
             // 
-            this.textBoxNieuweCategorie.Location = new System.Drawing.Point(12, 166);
+            this.textBoxNieuweCategorie.Location = new System.Drawing.Point(13, 204);
             this.textBoxNieuweCategorie.Name = "textBoxNieuweCategorie";
-            this.textBoxNieuweCategorie.Size = new System.Drawing.Size(179, 20);
-            this.textBoxNieuweCategorie.TabIndex = 1;
-            this.textBoxNieuweCategorie.Text = "nieuwe categorie";
+            this.textBoxNieuweCategorie.Size = new System.Drawing.Size(155, 20);
+            this.textBoxNieuweCategorie.TabIndex = 5;
+            this.textBoxNieuweCategorie.Text = " Nieuwe Categorie";
             this.textBoxNieuweCategorie.TextChanged += new System.EventHandler(this.textBoxNieuweCategorie_TextChanged);
             // 
-            // buttonAccepteer
+            // labelUitleg
             // 
-            this.buttonAccepteer.Location = new System.Drawing.Point(13, 188);
-            this.buttonAccepteer.Name = "buttonAccepteer";
-            this.buttonAccepteer.Size = new System.Drawing.Size(75, 23);
-            this.buttonAccepteer.TabIndex = 2;
-            this.buttonAccepteer.Text = "OK";
-            this.buttonAccepteer.UseVisualStyleBackColor = true;
-            this.buttonAccepteer.Click += new System.EventHandler(this.buttonAccepteer_Click);
+            this.labelUitleg.Location = new System.Drawing.Point(9, 167);
+            this.labelUitleg.Name = "labelUitleg";
+            this.labelUitleg.Size = new System.Drawing.Size(254, 34);
+            this.labelUitleg.TabIndex = 6;
+            this.labelUitleg.Text = "Kies 1 categorie en druk op de knop \'Toevoegen\' om een sub-categorie te maken.";
             // 
-            // buttonCategorieToevoegen
+            // checkedListBoxCategorien
             // 
-            this.buttonCategorieToevoegen.Location = new System.Drawing.Point(197, 166);
-            this.buttonCategorieToevoegen.Name = "buttonCategorieToevoegen";
-            this.buttonCategorieToevoegen.Size = new System.Drawing.Size(75, 23);
-            this.buttonCategorieToevoegen.TabIndex = 3;
-            this.buttonCategorieToevoegen.Text = "Toevoegen";
-            this.buttonCategorieToevoegen.UseVisualStyleBackColor = true;
-            this.buttonCategorieToevoegen.Click += new System.EventHandler(this.buttonCategorieToevoegen_Click);
+            this.checkedListBoxCategorien.FormattingEnabled = true;
+            this.checkedListBoxCategorien.Location = new System.Drawing.Point(12, 12);
+            this.checkedListBoxCategorien.Name = "checkedListBoxCategorien";
+            this.checkedListBoxCategorien.Size = new System.Drawing.Size(260, 154);
+            this.checkedListBoxCategorien.TabIndex = 7;
+            this.checkedListBoxCategorien.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxCategorien_SelectedIndexChanged);
             // 
             // CategorienForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 223);
-            this.Controls.Add(this.buttonCategorieToevoegen);
-            this.Controls.Add(this.buttonAccepteer);
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.checkedListBoxCategorien);
+            this.Controls.Add(this.labelUitleg);
             this.Controls.Add(this.textBoxNieuweCategorie);
-            this.Controls.Add(this.listBoxCategorien);
+            this.Controls.Add(this.buttonAnnuleren);
+            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.buttonNieuweCategorie);
             this.Name = "CategorienForm";
-            this.Text = "Kies Categorien";
+            this.Text = "Categoriën Kiezen";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -90,10 +112,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBoxCategorien;
+        private System.Windows.Forms.Button buttonNieuweCategorie;
+        private System.Windows.Forms.Button buttonOK;
+        private System.Windows.Forms.Button buttonAnnuleren;
         private System.Windows.Forms.TextBox textBoxNieuweCategorie;
-        private System.Windows.Forms.Button buttonAccepteer;
-        private System.Windows.Forms.Button buttonCategorieToevoegen;
-
+        private System.Windows.Forms.Label labelUitleg;
+        private System.Windows.Forms.CheckedListBox checkedListBoxCategorien;
     }
 }

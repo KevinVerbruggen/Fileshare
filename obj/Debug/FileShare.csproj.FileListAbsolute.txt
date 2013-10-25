@@ -30,3 +30,9 @@ C:\Users\HP user\Source\Repos\FileshareSME\bin\Debug\FileShare.exe.config
 C:\Users\Mr. Jin\Source\Repos\Fileshare\bin\Debug\FileShare.exe
 C:\Users\Mr. Jin\Source\Repos\Fileshare\bin\Debug\FileShare.pdb
 C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.Login.resources
+C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.csprojResolveAssemblyReference.cache
+C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.CategorienForm.resources
+C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.FileShareForm.resources
+C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.Login.resources
+C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.Properties.Resources.resources
+C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.csproj.GenerateResource.Cache

@@ -22,7 +22,6 @@ namespace FileShare
         private static DBconnect connectie = DBconnect.Instantie;
         private static Computer myComputer = new Computer();
         public static User localUser;
-        FileShareForm form = new FileShareForm();
 
         public int GetGeselecteerdBestandID = form.ListBoxBestanden.SelectedItems[0];
         public List<int> GetGeselecteerdeCategorieID;

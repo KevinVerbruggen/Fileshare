@@ -37,14 +37,14 @@ namespace FileShare
                 tcAlleBestanden.TabPages.Remove(tabPage3);
                 tcAlleBestanden.TabPages.Remove(tabPage4);
             }
-            //foreach (File bestand in mainclass.AlleFiles)
-            //{
-            //
-            //}
-            //foreach (Categorie categorie in mainclass.AlleCategorieen)
-            //{
-            //    listBoxCategorie.Items.Add(categorie.naam);
-            //}
+            foreach (File bestand in mainclass.AlleFiles)
+            {
+                ListBoxBestanden.Items.Add(bestand.naam);
+            }
+            foreach (Categorie categorie in mainclass.AlleCategorieen)
+            {
+                listBoxCategorie.Items.Add(categorie.naam);
+            }
 
             buttonVernieuwen_Click(null, null);
         }
