@@ -11,7 +11,7 @@ namespace FileShare
         //Benodigde variabelen.
         private string voterID;
         private string bestandID;
-        private Boolean upvote;
+        //private Boolean upvote;
 
         //Properties vaststellen
         public string VoterID 

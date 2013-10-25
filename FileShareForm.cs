@@ -66,11 +66,11 @@ namespace FileShare
 
         private void buttonVernieuwen_Click(object sender, EventArgs e)
         {
-            this.listBoxCategorie.Items.Clear();
-            this.ListBoxBestanden.Items.Clear();
+            listBoxCategorie.Items.Clear();
+            ListBoxBestanden.Items.Clear();
             //mainclass.vulTabellen();
-            this.listBoxCategorie.Items.AddRange(mainclass.AlleCategorieen.ToArray());
-            this.ListBoxBestanden.Items.AddRange(mainclass.AlleFiles.ToArray());
+            listBoxCategorie.Items.AddRange(mainclass.AlleCategorieen.ToArray());
+            ListBoxBestanden.Items.AddRange(mainclass.AlleFiles.ToArray());
         }
 
         private void buttonVerwijderen2_Click(object sender, EventArgs e)

@@ -28,11 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "hoi",
-            "hoi2",
-            "hoi3"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("kjhkjh");
             this.ListBoxBestanden = new System.Windows.Forms.ListBox();
             this.buttonDownloaden = new System.Windows.Forms.Button();
             this.buttonVerwijder = new System.Windows.Forms.Button();
@@ -43,24 +38,23 @@
             this.buttonVernieuwen = new System.Windows.Forms.Button();
             this.buttonVerwijderen2 = new System.Windows.Forms.Button();
             this.labelIngelogdAls = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tcAlleBestanden = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl1.SuspendLayout();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tcAlleBestanden.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ListBoxBestanden
             // 
-            this.ListBoxBestanden.Location = new System.Drawing.Point(324, 137);
+            this.ListBoxBestanden.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListBoxBestanden.Location = new System.Drawing.Point(3, 3);
+            this.ListBoxBestanden.Margin = new System.Windows.Forms.Padding(1);
             this.ListBoxBestanden.Name = "ListBoxBestanden";
-            this.ListBoxBestanden.Size = new System.Drawing.Size(205, 238);
+            this.ListBoxBestanden.Size = new System.Drawing.Size(544, 392);
             this.ListBoxBestanden.TabIndex = 0;
-            this.ListBoxBestanden.SelectedIndexChanged += new System.EventHandler(this.ListBoxBestanden_SelectedIndexChanged);
             // 
             // buttonDownloaden
             // 
@@ -120,7 +114,6 @@
             this.listBoxCategorie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBoxCategorie.Size = new System.Drawing.Size(185, 147);
             this.listBoxCategorie.TabIndex = 7;
-            this.listBoxCategorie.SelectedIndexChanged += new System.EventHandler(this.listBoxCategorie_SelectedIndexChanged);
             // 
             // buttonVernieuwen
             // 
@@ -151,48 +144,27 @@
             this.labelIngelogdAls.TabIndex = 10;
             this.labelIngelogdAls.Text = "Ingelogd als: ";
             // 
-            // listView1
+            // tcAlleBestanden
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-            this.listView1.Location = new System.Drawing.Point(3, 3);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(568, 437);
-            this.listView1.TabIndex = 11;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Width = 109;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(3, 10);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(582, 469);
-            this.tabControl1.TabIndex = 12;
+            this.tcAlleBestanden.Controls.Add(this.tabPage1);
+            this.tcAlleBestanden.Controls.Add(this.tabPage2);
+            this.tcAlleBestanden.Controls.Add(this.tabPage3);
+            this.tcAlleBestanden.Controls.Add(this.tabPage4);
+            this.tcAlleBestanden.Location = new System.Drawing.Point(12, 55);
+            this.tcAlleBestanden.Name = "tcAlleBestanden";
+            this.tcAlleBestanden.SelectedIndex = 0;
+            this.tcAlleBestanden.Size = new System.Drawing.Size(558, 424);
+            this.tcAlleBestanden.TabIndex = 11;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.ListBoxBestanden);
-            this.tabPage1.Controls.Add(this.listView1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(574, 443);
+            this.tabPage1.Size = new System.Drawing.Size(550, 398);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Alle bestanden";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -200,17 +172,36 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(574, 443);
+            this.tabPage2.Size = new System.Drawing.Size(550, 398);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Eigen bestanden";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(550, 398);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Geflagte bestanden";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(457, 199);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Alle gebruikers";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // FileShareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 491);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tcAlleBestanden);
             this.Controls.Add(this.labelIngelogdAls);
             this.Controls.Add(this.buttonVerwijderen2);
             this.Controls.Add(this.buttonVernieuwen);
@@ -223,7 +214,7 @@
             this.Name = "FileShareForm";
             this.Text = "FileShare";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FileShareForm_FormClosing);
-            this.tabControl1.ResumeLayout(false);
+            this.tcAlleBestanden.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -242,13 +233,11 @@
         private System.Windows.Forms.Button buttonVernieuwen;
         private System.Windows.Forms.Button buttonVerwijderen2;
         private System.Windows.Forms.Label labelIngelogdAls;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tcAlleBestanden;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
     }
 }
 
