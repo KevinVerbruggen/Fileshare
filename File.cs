@@ -14,6 +14,11 @@ namespace FileShare
         private int bezoekerID;
         private string locatie;
 
+        public int BestandID 
+        {
+            set { bestandID = value; }
+            get { return bestandID; }
+        }
         public string Naam
         {
             set { naam = value; }
@@ -24,6 +29,12 @@ namespace FileShare
         {
             set { bezoekerID = value; }
             get { return bezoekerID; }
+        }
+
+        public string Locatie 
+        {
+            set { locatie = value; }
+            get { return locatie; }
         }
 
         //De constructor voor een nieuwe bestand.
@@ -41,21 +52,6 @@ namespace FileShare
             this.naam = naam;
             this.bezoekerID = bezoekerID;
             this.locatie = locatie;
-        }
-
-        public int BestandID
-        {
-            get { return bestandID; }
-        }
-
-        public string GetLocatie
-        {
-            get { return locatie; }
-        }
-
-        public int GetUserID
-        {
-            get { return bezoekerID; }
         }
 
         public override string ToString()

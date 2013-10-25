@@ -121,6 +121,7 @@
             this.listBoxCategorie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBoxCategorie.Size = new System.Drawing.Size(185, 147);
             this.listBoxCategorie.TabIndex = 7;
+            this.listBoxCategorie.SelectedIndexChanged += new System.EventHandler(this.listBoxCategorie_SelectedIndexChanged);
             // 
             // buttonVernieuwen
             // 

@@ -25,6 +25,7 @@ namespace FileShare
 
         public int GetGeselecteerdBestandID = FileShareForm.ListBoxBestanden.SelectedItems[0];
         public List<int> GetGeselecteerdeCategorieID;
+        public List<int> GetGeselecteerdeCategorieBestanden;
 
         public static void InitialiseerApp()
         {
@@ -110,7 +111,7 @@ namespace FileShare
                 connectie.Delete("Flag", "BestandID = " + bestandID);
                 connectie.Delete("Bestand_Categorie", "BestandID = " + bestandID);
 
-                myComputer.FileSystem.DeleteFile(@"\\FILESHARE-SERVER\" + f.GetLocatie, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
+                myComputer.FileSystem.DeleteFile(@"\\FILESHARE-SERVER\" + f.Locatie, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
                 connectie.Delete("Bestand", "BestandID = " + bestandID);
             }
             else

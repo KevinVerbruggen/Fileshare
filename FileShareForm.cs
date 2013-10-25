@@ -74,7 +74,7 @@ namespace FileShare
 
          private void buttonDownloaden_Click(object sender, EventArgs e)
         {
-            mainclass.DownloadBestand(ListBoxBestanden.SelectedItems[0]);
+            mainclass.DownloadBestand(ListBoxBestanden.SelectedItem[0]);
         }
 
         private void buttonUpvote_Click(object sender, EventArgs e)
@@ -134,6 +134,15 @@ namespace FileShare
         private void buttonNieuweCategorie_Click(object sender, EventArgs e)
         {
         //    NieuweCategorieForm nieuweCategorieForm = new NieuweCategorieForm();
+        }
+
+        private void listBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mainclass.GetGeselecteerdeCategorieBestanden.Clear;
+            foreach (Categorie c in mainclass.AlleCategorieen) 
+            {
+                mainclass.GetGeselecteerdeCategorieBestanden.Add(c.Files);
+            }
         }
     }
 }

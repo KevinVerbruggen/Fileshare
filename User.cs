@@ -76,21 +76,21 @@ namespace FileShare
                 sUpvote = "N";
             }
 
-            connectie.Delete("vote", "BezoekerID = '" + mainclass.GetFileByID(bestandID).GetUserID + "' AND BestandID = '" + bestandID + "'");
-            connectie.Insert("vote", String.Format("{0}, {1}, '{2}'", bestandID, mainclass.GetFileByID(bestandID).GetUserID, sUpvote), "BestandID, BezoekerID, Upvote");
+            connectie.Delete("vote", "BezoekerID = '" + mainclass.GetFileByID(bestandID).BezoekerID + "' AND BestandID = '" + bestandID + "'");
+            connectie.Insert("vote", String.Format("{0}, {1}, '{2}'", bestandID, mainclass.GetFileByID(bestandID).BezoekerID, sUpvote), "BestandID, BezoekerID, Upvote");
         }
 
         //De functie om een categorie te verwijderen.
-        /* public void VerwijderCategorie(int id) 
+        public void VerwijderCategorie(int id) 
         {
             if (this.admin == true) //Indien de gebruiker de admin is,
             {
                 //alle bestanden die alleen in deze categorie zitten en de categorie zelf verwijderen.
-                foreach (File item in mainclass.AlleFiles)
+                foreach (Categorie categorie in mainclass.AlleCategorieen)
 	            {
-		            if(item.CategorieIDs.Contains(id)) 
+		            foreach (File bestand in categorie.Files)
                     {
-                        // TODO: Delete this file
+                        mainclass.VerwijderBestand(bestand.BestandID, this.bezoekerID);
                     }
 	            }
 
@@ -100,13 +100,13 @@ namespace FileShare
                     mainclass.VerwijderBestand(mainclass.geselecteerdeCategorieBestanden[i], this.bezoekerID);
                 }
                 
-                connectie.Delete("categorie", "categorieID="+mainclass.geselecteerdeCategorie.GetCategorieID);
+                connectie.Delete("categorie", "categorieID="+mainclass.GetGeselecteerdeCategorieID);
             }
             else //Voor elke andere gebruiker,
             { //deze opdracht negeren
                 return;
             }
-        }*/
+        }
 
         public void Rapporteren(int bestandID)
         {
