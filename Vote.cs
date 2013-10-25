@@ -11,7 +11,7 @@ namespace FileShare
         //Benodigde variabelen.
         private string voterID;
         private string bestandID;
-        //private Boolean upvote;
+        private Boolean upvote;
 
         //Properties vaststellen
         public string VoterID 
@@ -25,10 +25,10 @@ namespace FileShare
         }
 
         //De constructor. Met deze functie wordt een vote aangemaakt.
-        public Vote(string voterID, string bestandID, Boolean upvote) {
+        public Vote(string voterID, string bestandID, string upvote) {
             this.voterID = voterID;
             this.bestandID = bestandID;
-            //this.upvote = mainclass.StringToBool(upvote);
+            this.upvote = mainclass.StringToBool(upvote);
         }
 
     }
