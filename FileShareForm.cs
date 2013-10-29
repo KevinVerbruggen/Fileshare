@@ -135,7 +135,7 @@ namespace FileShare
         {
             listBoxCategorie.Items.Clear();
             ListBoxBestanden.Items.Clear();
-            //mainclass.vulTabellen();
+            mainclass.InitialiseerApp();
             listBoxCategorie.Items.AddRange(mainclass.AlleCategorieen.ToArray());
             ListBoxBestanden.Items.AddRange(mainclass.AlleFiles.ToArray());
         }
@@ -156,7 +156,7 @@ namespace FileShare
             if (ListBoxBestanden.SelectedItems.Count > 0)
             {
                 int id = mainclass.AlleFiles[ListBoxBestanden.SelectedIndex].BestandID;
-                mainclass.localUser.Rapporteren(id);
+                mainclass.localUser.Rapporteren(GeselecteerdeBestandenIDs);
                 MessageBox.Show("Bestand is downvoted");
             }
         }

@@ -80,10 +80,19 @@ namespace FileShare
             connectie.Insert("vote", String.Format("{0}, {1}, '{2}'", bestandID, mainclass.GetFileByID(bestandID).BezoekerID, sUpvote), "BestandID, BezoekerID, Upvote");
         }
 
-        public void Rapporteren(int bestandID)
+        public void Rapporteren(List<int> bestandIDs)
         {
-            connectie.Insert("Flag", bestandID + ", " + bezoekerID, "bestandID, bezoekerID");
+            foreach (int i in bestandIDs){
+                connectie.Insert("Flag", bestandIDs[i] + ", " + bezoekerID, "bestandID, bezoekerID");
+                if (mainclass.GeFlagteBestanden.Count() > mainclass.flagwaarde * mainclass.AlleGebruikers.Count())
+                {
+                    mainclass.AutoVerwijderBestand(i);
+                }
+                //mainclass.GeFlagteBestanden.Add();
+            }
+            mainclass.InitialiseerApp();
         }
+
         public override string ToString()
         {
             return String.Format("ID: {0}, Naam: {1}, Wachtwoord: {2}, Soort account: {3} ", bezoekerID, gebruikersnaam, wachtwoord,soort);

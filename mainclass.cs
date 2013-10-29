@@ -14,6 +14,7 @@ namespace FileShare
     class mainclass
     {
         public static string servernaam = "FILESHARE-SERVER";
+        public static double flagwaarde = 0.2;
 
         public static List<File> AlleFiles = new List<File>();
         public static List<File> EigenBestanden = new List<File>();
@@ -26,23 +27,35 @@ namespace FileShare
 
         public static void InitialiseerApp()
         {
-            //hier worden alle datatables aangemaakt en gevuld
+            //Hier worden alle datatables aangemaakt.
             DataTable bestandenTabel;
-            bestandenTabel = connectie.SelectMultiple("Bestand", "*");
             DataTable eigenBestandenTabel;
-            eigenBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BezoekerID = ");
             DataTable geFlagteBestandenTabel;
-            geFlagteBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT DISTINCT(BestandID) FROM Flags)");
             DataTable alleGebruikersTabel;
-            alleGebruikersTabel = connectie.SelectMultiple("account", "*");
-            
             DataTable categorienTabel;
+
+            //Hier worden alle gegevens opgehaald uit de database.
+            bestandenTabel = connectie.SelectMultiple("Bestand", "*");
+            eigenBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BezoekerID = ");
+            eigenBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BezoekerID = ");
+            geFlagteBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT DISTINCT(BestandID) FROM Flags)");
+            alleGebruikersTabel = connectie.SelectMultiple("account", "*");
             categorienTabel = connectie.SelectMultiple("Categorie", "*");
 
+            //Hier worden de gegevens omgezet naar een leesbaar formaat.
             foreach (DataRow row in bestandenTabel.Rows)
             {
                 AlleFiles.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
             }
+            foreach (DataRow row in eigenBestandenTabel.Rows)
+            {
+                EigenBestanden.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
+            }
+            foreach (DataRow row in geFlagteBestandenTabel.Rows)
+            {
+                GeFlagteBestanden.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
+            }
+
             foreach (DataRow row in categorienTabel.Rows)
             {
                 AlleCategorieen.Add(new Categorie(Convert.ToInt32(row["CategorieID"]), Convert.ToString(row["naam"]), Convert.ToInt32(row["ParentID"])));
@@ -88,18 +101,25 @@ namespace FileShare
             File f = shortList[0];
             if (shortList.Count > 0 && (localUser.Admin == true || localUser.BezoekerID == Convert.ToInt32(connectie.SingleSelect("Bestand", "bezoekerID", "bestandID = " + bestandID))))
             {
-                connectie.Delete("BestandZichtbaarheid", "BestandID = " + bestandID);
-                connectie.Delete("Vote", "BestandID = " + bestandID);
-                connectie.Delete("Flag", "BestandID = " + bestandID);
-                connectie.Delete("Bestand_Categorie", "BestandID = " + bestandID);
-
-                myComputer.FileSystem.DeleteFile(@"\\" + servernaam + @"\" + f.Locatie, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
-                connectie.Delete("Bestand", "BestandID = " + bestandID);
+                AutoVerwijderBestand(bestandID);
             }
             else
             {
                 MessageBox.Show("Er is iets misgegaan. Het bestand kan niet verwijderd worden.");
             }
+        }
+
+        public static void AutoVerwijderBestand(int bestandID) 
+        {
+            connectie.Delete("BestandZichtbaarheid", "BestandID = " + bestandID);
+            connectie.Delete("Vote", "BestandID = " + bestandID);
+            connectie.Delete("Flag", "BestandID = " + bestandID);
+            connectie.Delete("Bestand_Categorie", "BestandID = " + bestandID);
+
+            /*Database-connectie mogelijk vervangen door locatie in 'AlleBestanden'-lijst*/
+            myComputer.FileSystem.DeleteFile(@"\\" + servernaam + @"\" + connectie.SingleSelect("Bestand", "locatie", "BestandID = " + bestandID), Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
+            connectie.Delete("Bestand", "BestandID = " + bestandID);
+
         }
 
         //De functie om een categorie te verwijderen.
