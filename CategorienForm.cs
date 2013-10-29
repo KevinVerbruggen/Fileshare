@@ -13,7 +13,7 @@ namespace FileShare
     public partial class CategorienForm : Form
     {
         string uploadBestandLocatie;
-        List<int> bestandZichtbaarheid;
+        private List<int> checkedCategorien;
 
         public CategorienForm(string uploadBestandLocatie)
         {
@@ -21,8 +21,17 @@ namespace FileShare
             this.uploadBestandLocatie = uploadBestandLocatie;
             foreach (Categorie categorie in mainclass.AlleCategorieen)
             {
-                checkedListBoxCategorien.Items.Add(categorie.naam, false);
+                checkedListBoxCategorien.Items.Add(categorie.Naam, false);
             }
+        }
+
+        private void vulListCategorien() 
+        {
+            checkedCategorien.Clear();
+            foreach (int indexChecked in checkedListBoxCategorien.CheckedIndices)
+                {
+                    this.checkedCategorien.Add(indexChecked);
+                }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -32,9 +41,10 @@ namespace FileShare
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (checkedListBoxCategorien.CheckedItems.Count > 0)
+            if (checkedListBoxCategorien.CheckedItems.Count == 1)
             {
-                FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(uploadBestandLocatie, checkedListBoxCategorien.CheckedIndices);
+                this.vulListCategorien();
+                FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(uploadBestandLocatie, checkedCategorien);
                 this.Close();
             }
             else if (checkedListBoxCategorien.CheckedItems.Count == 0)
@@ -46,8 +56,8 @@ namespace FileShare
                 DialogResult doorgaanYN = MessageBox.Show("Je hebt meer dan 1 categorie geselecteerd. Weet je zeker dat je wilt doorgaan?", "Weet je het zeker?", MessageBoxButtons.YesNo);
                 if (doorgaanYN == DialogResult.Yes) 
                 {
-                    FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(uploadBestandLocatie, checkedListBoxCategorien.CheckedIndices);
-                this.Close();
+                    FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(uploadBestandLocatie.ToString(), checkedCategorien);
+                    this.Close();
                 }
             }
             
@@ -60,9 +70,10 @@ namespace FileShare
 
         private void buttonNieuweCategorie_Click(object sender, EventArgs e)
         {
-            if (checkedListBoxCategorien.CheckedItems.Count == 1)
+            vulListCategorien();
+            if (this.checkedCategorien.Count == 1)
             {
-                mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text, this.checkedListBoxCategorien.CheckedIndices);
+                mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text, this.checkedCategorien[0]);
             }
             else {
                 mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);

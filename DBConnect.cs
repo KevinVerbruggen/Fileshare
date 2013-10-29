@@ -170,14 +170,13 @@ namespace FileShare
 
         }
 
-
         //select multiple
-        public DataTable SelectMultiple(string tabel, string velden, string waar = "1")
+        public DataTable SelectMultiple(string tabel, string velden, string waar = "1", string extra = "")
         {
             DataTable data = new DataTable();
             if (this.OpenConnection() == true)
             {
-                string query = "SELECT " + velden + " FROM " + tabel + " WHERE " + waar + ";";
+                string query = "SELECT " + velden + " FROM " + tabel + " WHERE " + waar + extra + ";";
                 Console.WriteLine(query);
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 data.Load(cmd.ExecuteReader());

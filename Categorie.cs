@@ -8,12 +8,31 @@ namespace FileShare
 {
     class Categorie
     {
-        public int categorieID;
-        public string naam;
-        public int? parentID;
+        private int categorieID;
+        private string naam;
+        private int? parentID;
         private List<File> files = new List<File>();
 
-        public List<File> Files{
+        public int CategorieID 
+        {
+            set { categorieID = value; }
+            get { return categorieID; }
+        }
+
+        public string Naam 
+        {
+            set { naam = value; }
+            get { return naam; }
+        }
+
+        public int? ParentID 
+        {
+            set { parentID = value; }
+            get { return parentID; }
+        }
+
+        public List<File> Files
+        {
             set { files = value; }
             get { return files; }
         }

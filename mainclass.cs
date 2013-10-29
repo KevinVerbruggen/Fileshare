@@ -7,25 +7,22 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.VisualBasic.Devices;
+using System.Windows.Forms;
 
 namespace FileShare
 {
     class mainclass
     {
-        string servernaam = "FILESHARE-SERVER";
+        public static string servernaam = "FILESHARE-SERVER";
 
         public static List<File> AlleFiles = new List<File>();
         public static List<File> EigenBestanden = new List<File>();
         public static List<File> GeFlagteBestanden = new List<File>();
-        public static List<File> AlleGebruikers = new List<File>();
+        public static List<User> AlleGebruikers = new List<User>();
         public static List<Categorie> AlleCategorieen = new List<Categorie>();
         private static DBconnect connectie = DBconnect.Instantie;
         private static Computer myComputer = new Computer();
         public static User localUser;
-
-        public int GetGeselecteerdBestandID = FileShareForm.ListBoxBestanden.SelectedItems[0];
-        public List<int> GetGeselecteerdeCategorieID;
-        public List<int> GetGeselecteerdeCategorieBestanden;
 
         public static void InitialiseerApp()
         {
@@ -37,8 +34,8 @@ namespace FileShare
             DataTable geFlagteBestandenTabel;
             geFlagteBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT DISTINCT(BestandID) FROM Flags)");
             DataTable alleGebruikersTabel;
-            alleGebruikersTabel = connectie.SelectMultiple("account", "*");      
-
+            alleGebruikersTabel = connectie.SelectMultiple("account", "*");
+            
             DataTable categorienTabel;
             categorienTabel = connectie.SelectMultiple("Categorie", "*");
 
@@ -52,7 +49,7 @@ namespace FileShare
             }
         }
 
-        public bool StringToBool(string str) 
+        public static bool StringToBool(string str) 
         {
             if (str.Equals('Y')) 
             {
@@ -81,53 +78,67 @@ namespace FileShare
             }
         }
 
-        public int GetMaxBestandID()
+        public static int GetMaxBestandID()
         {
             return Convert.ToInt32(connectie.SingleSelect("Bestanden", "MAX(BestandID)", ""));
         }
 
-        public int GetGeselecteerdBestandUploaderID()
-        {
-            return Convert.ToInt32(connectie.SingleSelect("Bestanden", "uploaderID", "BestandsID = " + GetGeselecteerdBestandID));
-        }
-
-        public string GetGeselecteerdBestandNaam()
-        {
-            return Convert.ToString(connectie.SingleSelect("Bestanden", "Bestandsnaam", "BestandsID = " + GetGeselecteerdBestandID));
-        }
-
-        public string GetGeselecteerdBestandLocatie()
-        {
-            return Convert.ToString(connectie.SingleSelect("Bestanden", "Locatie", "BestandsID = " + GetGeselecteerdBestandID));
-        }
-
-        public void VerwijderBestand(int bestandID, int userID){
+        public static void VerwijderBestand(int bestandID, int userID){
             List<File> shortList = AlleFiles.Where(o => o.BestandID == bestandID).ToList();
             File f = shortList[0];
-            if (shortList.Count > 0 && (localUser.Admin == true || f.BezoekerID == GetGeselecteerdBestandUploaderID))
+            if (shortList.Count > 0 && (localUser.Admin == true || localUser.BezoekerID == Convert.ToInt32(connectie.SingleSelect("Bestand", "bezoekerID", "bestandID = " + bestandID))))
             {
                 connectie.Delete("BestandZichtbaarheid", "BestandID = " + bestandID);
                 connectie.Delete("Vote", "BestandID = " + bestandID);
                 connectie.Delete("Flag", "BestandID = " + bestandID);
                 connectie.Delete("Bestand_Categorie", "BestandID = " + bestandID);
 
-                myComputer.FileSystem.DeleteFile(@"\\FILESHARE-SERVER\" + f.Locatie, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
+                myComputer.FileSystem.DeleteFile(@"\\" + servernaam + @"\" + f.Locatie, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
                 connectie.Delete("Bestand", "BestandID = " + bestandID);
             }
             else
             {
-                // TODO: Melding, iets is fout gegaan (Bestand bestond al niet meer voor verwijderen)
+                MessageBox.Show("Er is iets misgegaan. Het bestand kan niet verwijderd worden.");
             }
         }
 
-        public void UploadBestand(string uploadBestandLocatie, List<int> categorieID, List<int> bestandZichtbaarheid)
+        //De functie om een categorie te verwijderen.
+        public static void VerwijderCategorie(List<int> categorieIDs)
+        {
+            if (localUser.Admin == true) //Indien de gebruiker de admin is,
+            {
+                List<int> BestandIDs = new List<int>();
+                //alle bestanden die alleen in deze categorie zitten en de categorie zelf verwijderen.
+                DataTable BestandIDsDB = connectie.SelectMultiple("Bestand_categorie", "BestandID", "CategorieID = " + categorieIDs + "HAVING COUNT(*) < 2 GROUP BY BestandID");
+                foreach (DataRow row in BestandIDsDB.Rows)
+                {
+                    BestandIDs.Add(Convert.ToInt32(row["BestandID"]));
+                }
+
+                for (int i = 0; i < BestandIDs.Count(); i++)
+                {
+                    mainclass.VerwijderBestand(BestandIDs[i], localUser.BezoekerID);
+                }
+
+                foreach (int i in categorieIDs)
+                {
+                    connectie.Delete("categorie", "categorieID=" + categorieIDs[i]);
+                }
+            }
+            else //Voor elke andere gebruiker,
+            { //deze opdracht negeren
+                return;
+            }
+        }
+
+        public static void UploadBestand(string uploadBestandLocatie, List<int> categorieIDs, List<int> bestandZichtbaarheid)
         {
             int bestandID = GetMaxBestandID() + 1;
             string bestandsnaam = System.IO.Path.GetFileName(uploadBestandLocatie);
             myComputer.FileSystem.CopyFile(uploadBestandLocatie, @"\\FILESHARE-SERVER\" + bestandID);
             connectie.Insert("Bestand", bestandsnaam + ", " + bestandID.ToString() + ", " + localUser.BezoekerID, "Naam, Locatie, bezoekerID");
             AlleFiles.Add(new File(Convert.ToInt32(AlleFiles.Count), Convert.ToString(Path.GetFileName(uploadBestandLocatie)), Convert.ToInt32(localUser.BezoekerID), Convert.ToString(uploadBestandLocatie)));
-            foreach (int i in categorieID)
+            foreach (int i in categorieIDs)
             {
                 connectie.Insert("BestandCategorie", bestandID + ", " + i, "BestandID, CategorieID");
             }
@@ -137,9 +148,12 @@ namespace FileShare
             }
         }
 
-        public void DownloadBestand(int bestandID)
+        public static void DownloadBestand(List<int> bestandID)
         {
-            myComputer.FileSystem.CopyFile(@"\\FILESHARE-SERVER\" + Convert.ToInt32(GetGeselecteerdBestandID), @"%USERPROFILE%\Downloads\" + GetGeselecteerdBestandNaam());
+            foreach (int i in bestandID)
+            {
+                myComputer.FileSystem.CopyFile(@"\\FILESHARE-SERVER\" + i, @"%USERPROFILE%\Downloads\" + Convert.ToInt32(connectie.SingleSelect("Bestand", "naam", "bestandID = " + bestandID)));
+            }
         }
     }
 }

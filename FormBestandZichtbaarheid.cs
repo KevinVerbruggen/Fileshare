@@ -13,9 +13,10 @@ namespace FileShare
     public partial class FormBestandZichtbaarheid : Form
     {
         string uploadBestandLocatie;
-        CheckedListBox.CheckedIndexCollection categorien;
+        List<int> categorien;
+        List<int> checkedUsers;
 
-        public FormBestandZichtbaarheid(string uploadBestandLocatie, CheckedListBox.CheckedIndexCollection categorien)
+        public FormBestandZichtbaarheid(string uploadBestandLocatie, List<int> categorien)
         {
             InitializeComponent();
             checkedListBoxZichtbaarheid.Items.Add(mainclass.localUser.BezoekerID, true);
@@ -27,6 +28,15 @@ namespace FileShare
             this.categorien = categorien;
         }
 
+        private void vulListUsers()
+        {
+            checkedUsers.Clear();
+            foreach (int indexChecked in checkedListBoxZichtbaarheid.CheckedIndices)
+            {
+                checkedUsers.Add(indexChecked);
+            }
+        }
+
         private void checkedListBoxZichtbaarheid_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -34,9 +44,10 @@ namespace FileShare
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            vulListUsers();
             if (checkedListBoxZichtbaarheid.CheckedItems.Count > 0)
             {
-                mainclass.UploadBestand(uploadBestandLocatie, categorien, checkedListBoxZichtbaarheid.SelectedIndices);
+                mainclass.UploadBestand(uploadBestandLocatie, categorien, checkedUsers);
                 this.Close();
             }
             else

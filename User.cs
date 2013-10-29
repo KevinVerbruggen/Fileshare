@@ -80,34 +80,6 @@ namespace FileShare
             connectie.Insert("vote", String.Format("{0}, {1}, '{2}'", bestandID, mainclass.GetFileByID(bestandID).BezoekerID, sUpvote), "BestandID, BezoekerID, Upvote");
         }
 
-        //De functie om een categorie te verwijderen.
-        public void VerwijderCategorie(int id) 
-        {
-            if (this.admin == true) //Indien de gebruiker de admin is,
-            {
-                //alle bestanden die alleen in deze categorie zitten en de categorie zelf verwijderen.
-                foreach (Categorie categorie in mainclass.AlleCategorieen)
-	            {
-		            foreach (File bestand in categorie.Files)
-                    {
-                        mainclass.VerwijderBestand(bestand.BestandID, this.bezoekerID);
-                    }
-	            }
-
-                
-                for (int i=0; i<mainclass.geselecteerdeCategorieBestanden.length; i++)
-                {
-                    mainclass.VerwijderBestand(mainclass.geselecteerdeCategorieBestanden[i], this.bezoekerID);
-                }
-                
-                connectie.Delete("categorie", "categorieID="+mainclass.GetGeselecteerdeCategorieID);
-            }
-            else //Voor elke andere gebruiker,
-            { //deze opdracht negeren
-                return;
-            }
-        }
-
         public void Rapporteren(int bestandID)
         {
             connectie.Insert("Flag", bestandID + ", " + bezoekerID, "bestandID, bezoekerID");

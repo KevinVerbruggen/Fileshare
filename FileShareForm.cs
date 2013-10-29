@@ -13,6 +13,8 @@ namespace FileShare
     public partial class FileShareForm : Form
     {
         public string uploadBestandLocatie;
+        public List<int> GeselecteerdeBestandenIDs;
+        public List<int> GeselecteerdeCategorieIDs;
         
         public string UserName
         {
@@ -33,7 +35,7 @@ namespace FileShare
             }
             foreach (Categorie categorie in mainclass.AlleCategorieen)
             {
-                listBoxCategorie.Items.Add(categorie.naam);
+                listBoxCategorie.Items.Add(categorie.Naam);
             }
             foreach (File bestand in mainclass.EigenBestanden)
             {
@@ -58,6 +60,24 @@ namespace FileShare
             buttonVernieuwen_Click(null, null);
         }
 
+        public void VulLijstGeselecteerdeBestandenIDs() 
+        {
+            GeselecteerdeBestandenIDs.Clear();
+            foreach (int i in ListBoxBestanden.SelectedItems) 
+            {
+                GeselecteerdeBestandenIDs.Add(ListBoxBestanden.SelectedIndices[i]);
+            }
+        }
+
+        public void VulLijstGeselecteerdeCategorieIDs() 
+        {
+            GeselecteerdeCategorieIDs.Clear();
+            foreach (int i in listBoxCategorie.SelectedIndices) 
+            {
+                GeselecteerdeCategorieIDs.Add(listBoxCategorie.SelectedIndices[i]);
+            }
+        }
+
         private void buttonUploaden_Click(object sender, EventArgs e)
         {
             uploadBestandLocatie = "";
@@ -68,7 +88,10 @@ namespace FileShare
             {
                 uploadBestandLocatie = kiesBestandDialog.FileName;
             }
-            if (uploadBestandLocatie != "")
+            if (uploadBestandLocatie == "")
+            {
+                return;
+            }else
             {
                 CategorienForm kiesCategorienForm = new CategorienForm(uploadBestandLocatie);
             }
@@ -76,7 +99,7 @@ namespace FileShare
 
          private void buttonDownloaden_Click(object sender, EventArgs e)
         {
-            mainclass.DownloadBestand(ListBoxBestanden.SelectedItem[0]);
+            mainclass.DownloadBestand(GeselecteerdeBestandenIDs);
         }
 
         private void buttonUpvote_Click(object sender, EventArgs e)
@@ -101,7 +124,11 @@ namespace FileShare
 
         private void buttonVerwijder_Click(object sender, EventArgs e)
         {
-            mainclass.VerwijderBestand(ListBoxBestanden.SelectedItems[0], mainclass.localUser.BezoekerID);
+            VulLijstGeselecteerdeBestandenIDs();
+            foreach (int i in GeselecteerdeBestandenIDs)
+            {
+                mainclass.VerwijderBestand(GeselecteerdeBestandenIDs[i], mainclass.localUser.BezoekerID);
+            }
         }
 
         private void buttonVernieuwen_Click(object sender, EventArgs e)
@@ -115,7 +142,8 @@ namespace FileShare
 
         private void buttonVerwijderen2_Click(object sender, EventArgs e)
         {
-            mainclass.localUser.VerwijderCategorie(listBoxCategorie.SelectedItems[0]);
+            VulLijstGeselecteerdeCategorieIDs();
+            mainclass.VerwijderCategorie(GeselecteerdeCategorieIDs);
         }
 
         private void FileShareForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -140,11 +168,6 @@ namespace FileShare
 
         private void listBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mainclass.GetGeselecteerdeCategorieBestanden.Clear;
-            foreach (Categorie c in mainclass.AlleCategorieen) 
-            {
-                mainclass.GetGeselecteerdeCategorieBestanden.Add(c.Files);
-            }
         }
     }
 }
