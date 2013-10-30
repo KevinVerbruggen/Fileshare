@@ -35,9 +35,14 @@ namespace FileShare
             DataTable categorienTabel;
 
             //Hier worden alle gegevens opgehaald uit de database.
-            bestandenTabel = connectie.SelectMultiple("Bestand", "*");
-            eigenBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BezoekerID = ");
-            eigenBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BezoekerID = ");
+            if (localUser.Admin == false)
+            {
+                bestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT BestandID FROM Bestandzichtbaarheid WHERE BezoekerID = " + localUser.BezoekerID + ")");
+            }
+            else {
+                bestandenTabel = connectie.SelectMultiple("Bestand", "*");
+            }
+            eigenBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BezoekerID = " + localUser.BezoekerID);
             geFlagteBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT DISTINCT(BestandID) FROM Flags)");
             alleGebruikersTabel = connectie.SelectMultiple("account", "*");
             categorienTabel = connectie.SelectMultiple("Categorie", "*");
@@ -111,13 +116,14 @@ namespace FileShare
 
         public static void AutoVerwijderBestand(int bestandID) 
         {
+            myComputer.FileSystem.DeleteFile(@"\\" + servernaam + @"\" + connectie.SingleSelect("Bestand", "locatie", "BestandID = " + bestandID), Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently);
+
             connectie.Delete("BestandZichtbaarheid", "BestandID = " + bestandID);
             connectie.Delete("Vote", "BestandID = " + bestandID);
             connectie.Delete("Flag", "BestandID = " + bestandID);
             connectie.Delete("Bestand_Categorie", "BestandID = " + bestandID);
 
             /*Database-connectie mogelijk vervangen door locatie in 'AlleBestanden'-lijst*/
-            myComputer.FileSystem.DeleteFile(@"\\" + servernaam + @"\" + connectie.SingleSelect("Bestand", "locatie", "BestandID = " + bestandID), Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.DeletePermanently, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
             connectie.Delete("Bestand", "BestandID = " + bestandID);
 
         }

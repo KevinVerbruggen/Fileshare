@@ -86,7 +86,7 @@ namespace FileShare
                 connectie.Insert("Flag", bestandIDs[i] + ", " + bezoekerID, "bestandID, bezoekerID");
                 if (mainclass.GeFlagteBestanden.Count() > mainclass.flagwaarde * mainclass.AlleGebruikers.Count())
                 {
-                    mainclass.AutoVerwijderBestand(i);
+                    connectie.Delete("BestandZichtbaarheid", "BestandID = " + i);
                 }
                 //mainclass.GeFlagteBestanden.Add();
             }
