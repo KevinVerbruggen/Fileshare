@@ -13,7 +13,7 @@ namespace FileShare
 {
     class mainclass
     {
-        public static string servernaam = "FILESHARE-SERVER";
+        public static string servernaam = @"\\KVERBRUGGEN\Users\HP user\Documents\temp";
         public static double flagwaarde = 0.2;
 
         public static List<File> AlleFiles = new List<File>();
@@ -43,7 +43,7 @@ namespace FileShare
                 bestandenTabel = connectie.SelectMultiple("Bestand", "*");
             }
             eigenBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BezoekerID = " + localUser.BezoekerID);
-            geFlagteBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT DISTINCT(BestandID) FROM Flags)");
+            geFlagteBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT DISTINCT(BestandID) FROM Flag)");
             alleGebruikersTabel = connectie.SelectMultiple("account", "*");
             categorienTabel = connectie.SelectMultiple("Categorie", "*");
 
@@ -60,6 +60,14 @@ namespace FileShare
             {
                 GeFlagteBestanden.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
             }
+
+            //foreach (DataRow row in categorienTabel.Rows)
+            //{
+            //    if (row["ParentID"].GetType.Equals(DBNull)) 
+            //    { 
+            //        row["ParentID"] = null;
+            //    }
+            //}
 
             foreach (DataRow row in categorienTabel.Rows)
             {
