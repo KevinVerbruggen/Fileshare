@@ -51,3 +51,8 @@ C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.FormBestandZichtbaa
 C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.Login.resources
 C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.Properties.Resources.resources
 C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.csproj.GenerateResource.Cache
+C:\Users\HP user\Source\Repos\Fileshare3\bin\Debug\FileShare.exe
+C:\Users\HP user\Source\Repos\Fileshare3\bin\Debug\FileShare.pdb
+C:\Users\HP user\Source\Repos\Fileshare3\bin\Debug\mysql.data.dll
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.pdb
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.BezoekersForm.resources

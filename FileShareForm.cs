@@ -167,5 +167,10 @@ namespace FileShare
                 MessageBox.Show("Gebruiker is geblokkeerd");
             }
         }
+
+        private void buttonGebruikerBlokkeren_Click_1(object sender, EventArgs e)
+        {
+            BezoekersForm bezoekersForm = new BezoekersForm();
+        }
     }
 }

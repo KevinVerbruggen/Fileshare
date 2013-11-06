@@ -47,6 +47,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.ListBoxAlleGebruikers = new System.Windows.Forms.ListBox();
             this.buttonFlag = new System.Windows.Forms.Button();
+            this.buttonGebruikerBlokkeren = new System.Windows.Forms.Button();
             this.tcAlleBestanden.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -243,11 +244,22 @@
             this.buttonFlag.Text = "Rapporteren";
             this.buttonFlag.UseVisualStyleBackColor = true;
             // 
+            // buttonGebruikerBlokkeren
+            // 
+            this.buttonGebruikerBlokkeren.Location = new System.Drawing.Point(488, 10);
+            this.buttonGebruikerBlokkeren.Name = "buttonGebruikerBlokkeren";
+            this.buttonGebruikerBlokkeren.Size = new System.Drawing.Size(75, 39);
+            this.buttonGebruikerBlokkeren.TabIndex = 13;
+            this.buttonGebruikerBlokkeren.Text = "Gebruiker Blokkeren";
+            this.buttonGebruikerBlokkeren.UseVisualStyleBackColor = true;
+            this.buttonGebruikerBlokkeren.Click += new System.EventHandler(this.buttonGebruikerBlokkeren_Click_1);
+            // 
             // FileShareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 491);
+            this.Controls.Add(this.buttonGebruikerBlokkeren);
             this.Controls.Add(this.buttonFlag);
             this.Controls.Add(this.tcAlleBestanden);
             this.Controls.Add(this.labelIngelogdAls);
@@ -293,6 +305,7 @@
         private System.Windows.Forms.ListBox ListBoxFlagBestanden;
         private System.Windows.Forms.ListBox ListBoxAlleGebruikers;
         private System.Windows.Forms.Button buttonFlag;
+        private System.Windows.Forms.Button buttonGebruikerBlokkeren;
     }
 }
 
