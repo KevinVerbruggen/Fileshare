@@ -44,8 +44,11 @@ namespace FileShare
 
         public void VulLijstGeselecteerdeBestandenIDs() 
         {
-            GeselecteerdeBestandenIDs.Clear();
-            foreach (int i in ListBoxBestanden.SelectedItems) 
+            if (GeselecteerdeBestandenIDs != null)
+            {
+                GeselecteerdeBestandenIDs.Clear();
+            }
+            foreach (int i in ListBoxBestanden.SelectedIndices) 
             {
                 GeselecteerdeBestandenIDs.Add(ListBoxBestanden.SelectedIndices[i]);
             }
@@ -53,7 +56,10 @@ namespace FileShare
 
         public void VulLijstGeselecteerdeCategorieIDs() 
         {
-            GeselecteerdeCategorieIDs.Clear();
+            if (GeselecteerdeBestandenIDs != null)
+            {
+                GeselecteerdeCategorieIDs.Clear();
+            }
             foreach (int i in listBoxCategorie.SelectedIndices) 
             {
                 GeselecteerdeCategorieIDs.Add(listBoxCategorie.SelectedIndices[i]);
@@ -71,7 +77,14 @@ namespace FileShare
 
          private void buttonDownloaden_Click(object sender, EventArgs e)
         {
-            mainclass.DownloadBestand(GeselecteerdeBestandenIDs);
+            VulLijstGeselecteerdeBestandenIDs();
+            if (GeselecteerdeBestandenIDs != null)
+            {
+                mainclass.DownloadBestand(GeselecteerdeBestandenIDs);
+            }
+            else {
+                MessageBox.Show("Je hebt geen Bestand geselecteerd");
+            }
         }
 
         private void buttonUpvote_Click(object sender, EventArgs e)
@@ -105,14 +118,6 @@ namespace FileShare
 
         private void buttonVernieuwen_Click(object sender, EventArgs e)
         {
-            //Alle lijsten clearen
-
-            mainclass.AlleCategorieen.Clear();
-            mainclass.AlleFiles.Clear();
-            mainclass.EigenBestanden.Clear();
-            mainclass.AlleGebruikers.Clear();
-            mainclass.GeFlagteBestanden.Clear();
-
             mainclass.InitialiseerApp();
             listBoxCategorie.Items.Clear();
             ListBoxBestanden.Items.Clear();

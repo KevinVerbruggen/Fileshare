@@ -45,7 +45,6 @@ namespace FileShare
         {
             if (checkedListBoxCategorien.CheckedItems.Count == 1)
             {
-                this.vulListCategorien();
                 FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(bestandsNaam, uploadBestandLocatie, checkedCategorien);
                 this.Close();
             }

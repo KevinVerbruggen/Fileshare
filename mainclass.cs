@@ -83,11 +83,6 @@ namespace FileShare
                     AlleCategorieen.Add(new Categorie(Convert.ToInt32(row["CategorieID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["ParentID"])));
                 }
             }
-
-            //foreach (DataRow row in categorienTabel.Rows)
-            //{
-            //    AlleCategorieen.Add(new Categorie(Convert.ToInt32(row["CategorieID"]), Convert.ToString(row["naam"]), Convert.ToInt32(row["ParentID"])));
-            //}
         }
 
         public static bool StringToBool(string str) 
