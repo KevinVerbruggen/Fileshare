@@ -65,15 +65,7 @@ namespace FileShare
             op = new OpenFileDialog();
             if (op.ShowDialog() == DialogResult.OK)
             {
-                //naam komt van andere form
-                string naam12 = "1234";
-
-                mainclass.localUser.Upload(naam12,op.SafeFileName,mainclass.localUser.BezoekerID,op.FileName);
-
-                //mainclass.localUser.UploadFile(toUpload.Name,filePath); 
-                //moet nog naar de db geschreven worden
-
-                MessageBox.Show("Uw file is met succes geupload naar de server");
+                new CategorienForm(op.SafeFileName, op.FileName);
             }  
         }
 

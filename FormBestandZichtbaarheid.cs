@@ -12,11 +12,12 @@ namespace FileShare
 {
     public partial class FormBestandZichtbaarheid : Form
     {
+        string bestandsNaam;
         string uploadBestandLocatie;
         List<int> categorien;
         List<int> checkedUsers;
 
-        public FormBestandZichtbaarheid(string uploadBestandLocatie, List<int> categorien)
+        public FormBestandZichtbaarheid(string bestandsNaam, string uploadBestandLocatie, List<int> categorien)
         {
             InitializeComponent();
             checkedListBoxZichtbaarheid.Items.Add(mainclass.localUser.BezoekerID, true);
@@ -24,6 +25,7 @@ namespace FileShare
             {
                 checkedListBoxZichtbaarheid.Items.Add(bezoeker.Gebruikersnaam, false);
             }
+            this.bestandsNaam = bestandsNaam;
             this.uploadBestandLocatie = uploadBestandLocatie;
             this.categorien = categorien;
         }
@@ -47,7 +49,8 @@ namespace FileShare
             vulListUsers();
             if (checkedListBoxZichtbaarheid.CheckedItems.Count > 0)
             {
-                mainclass.UploadBestand(uploadBestandLocatie, categorien, checkedUsers);
+                mainclass.localUser.UploadBestand(bestandsNaam, uploadBestandLocatie, categorien, checkedUsers);
+                MessageBox.Show("Uw file is met succes geupload naar de server");
                 this.Close();
             }
             else

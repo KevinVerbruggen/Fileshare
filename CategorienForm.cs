@@ -13,11 +13,13 @@ namespace FileShare
     public partial class CategorienForm : Form
     {
         string uploadBestandLocatie;
+        string bestandsNaam;
         private List<int> checkedCategorien;
 
-        public CategorienForm(string uploadBestandLocatie)
+        public CategorienForm(string bestandsNaam, string uploadBestandLocatie)
         {
             InitializeComponent();
+            this.bestandsNaam = bestandsNaam;
             this.uploadBestandLocatie = uploadBestandLocatie;
             foreach (Categorie categorie in mainclass.AlleCategorieen)
             {
@@ -44,7 +46,7 @@ namespace FileShare
             if (checkedListBoxCategorien.CheckedItems.Count == 1)
             {
                 this.vulListCategorien();
-                FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(uploadBestandLocatie, checkedCategorien);
+                FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(bestandsNaam, uploadBestandLocatie, checkedCategorien);
                 this.Close();
             }
             else if (checkedListBoxCategorien.CheckedItems.Count == 0)
@@ -56,7 +58,7 @@ namespace FileShare
                 DialogResult doorgaanYN = MessageBox.Show("Je hebt meer dan 1 categorie geselecteerd. Weet je zeker dat je wilt doorgaan?", "Weet je het zeker?", MessageBoxButtons.YesNo);
                 if (doorgaanYN == DialogResult.Yes) 
                 {
-                    FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(uploadBestandLocatie.ToString(), checkedCategorien);
+                    FormBestandZichtbaarheid zichtbaarheidsForm = new FormBestandZichtbaarheid(bestandsNaam, uploadBestandLocatie.ToString(), checkedCategorien);
                     this.Close();
                 }
             }

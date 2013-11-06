@@ -21,8 +21,8 @@ namespace FileShare
         public static List<File> GeFlagteBestanden = new List<File>();
         public static List<User> AlleGebruikers = new List<User>();
         public static List<Categorie> AlleCategorieen = new List<Categorie>();
-        private static DBconnect connectie = DBconnect.Instantie;
-        private static Computer myComputer = new Computer();
+        public static DBconnect connectie = DBconnect.Instantie;
+        public static Computer myComputer = new Computer();
         public static User localUser;
 
         public static void InitialiseerApp()
@@ -177,23 +177,6 @@ namespace FileShare
             else //Voor elke andere gebruiker,
             { //deze opdracht negeren
                 return;
-            }
-        }
-
-        public static void UploadBestand(string uploadBestandLocatie, List<int> categorieIDs, List<int> bestandZichtbaarheid)
-        {
-            int bestandID = GetMaxBestandID() + 1;
-            string bestandsnaam = System.IO.Path.GetFileName(uploadBestandLocatie);
-            myComputer.FileSystem.CopyFile(uploadBestandLocatie, @"\\FILESHARE-SERVER\" + bestandID);
-            connectie.Insert("Bestand", bestandsnaam + ", " + bestandID.ToString() + ", " + localUser.BezoekerID, "Naam, Locatie, bezoekerID");
-            AlleFiles.Add(new File(Convert.ToInt32(AlleFiles.Count), Convert.ToString(Path.GetFileName(uploadBestandLocatie)), Convert.ToInt32(localUser.BezoekerID), Convert.ToString(uploadBestandLocatie)));
-            foreach (int i in categorieIDs)
-            {
-                connectie.Insert("BestandCategorie", bestandID + ", " + i, "BestandID, CategorieID");
-            }
-            foreach (int i in bestandZichtbaarheid)
-            {
-                connectie.Insert("BestandZichtbaarheid", bestandID + ", " + i, "BestandID, bezoekerID");
             }
         }
 

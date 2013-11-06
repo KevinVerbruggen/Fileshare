@@ -98,5 +98,37 @@ namespace FileShare
         {
             return String.Format("ID: {0}, Naam: {1}, Wachtwoord: {2}, Soort account: {3} ", bezoekerID, gebruikersnaam, wachtwoord,soort);
         }
+
+        public void UploadBestand(string bestandsNaam, string uploadBestandLocatie, List<int> categorieIDs, List<int> bestandZichtbaarheid)
+        {
+            int bestandID = mainclass.GetMaxBestandID() + 1;
+            string bestandsnaam = System.IO.Path.GetFileName(uploadBestandLocatie);
+            mainclass.myComputer.FileSystem.CopyFile(uploadBestandLocatie, @"\\FILESHARE-SERVER\" + bestandID);
+            mainclass.connectie.Insert("Bestand", bestandsnaam + ", " + bestandID.ToString() + ", " + bezoekerID, "Naam, Locatie, bezoekerID");
+            mainclass.AlleFiles.Add(new File(Convert.ToInt32(mainclass.AlleFiles.Count), Convert.ToString(bestandsNaam), Convert.ToInt32(BezoekerID), Convert.ToString(uploadBestandLocatie)));
+            foreach (int i in categorieIDs)
+            {
+                mainclass.connectie.Insert("BestandCategorie", bestandID + ", " + i, "BestandID, CategorieID");
+            }
+            foreach (int i in bestandZichtbaarheid)
+            {
+                mainclass.connectie.Insert("BestandZichtbaarheid", bestandID + ", " + i, "BestandID, bezoekerID");
+            }
+        }
+
+        public void Blokkeer(int blockID) 
+        {
+            if (this.admin == true)
+            {
+                if (Convert.ToString(mainclass.connectie.SingleSelect("Account", "soort", "BezoekersID = " + blockID)) == "geblokkeerd")
+                {//als account geblokkeerd is, unblock hem.
+                    mainclass.connectie.Update("Account", "soort='normaal'", "bezoekerID = " + blockID);
+                }
+                else 
+                {//als account niet geblokkeerd is, blokkeer hem.
+                    mainclass.connectie.Update("Account", "soort='geblokkeerd'", "bezoekerID = " + blockID);
+                }
+            }
+        }
     }
 }
