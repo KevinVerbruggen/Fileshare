@@ -15,6 +15,7 @@ namespace FileShare
         public string uploadBestandLocatie;
         public List<int> GeselecteerdeBestandenIDs;
         public List<int> GeselecteerdeCategorieIDs;
+        OpenFileDialog op;
         
         public string UserName
         {
@@ -61,21 +62,19 @@ namespace FileShare
 
         private void buttonUploaden_Click(object sender, EventArgs e)
         {
-            uploadBestandLocatie = "";
-            OpenFileDialog kiesBestandDialog = new OpenFileDialog();
-            kiesBestandDialog.Filter = "Text Files (.txt)|*.txt|Microsoft Word-bestanden (.doc, .docx)|*.doc, *.docx|Afbeeldingen (.jpg, .png, .bmp, .tif)|*.jpg, *.jpeg, *.png, *.bmp, *.dip, *.tif, *.tiff|Alle Bestanden (*.*)|*.*";
-            kiesBestandDialog.Multiselect = false;
-            if (kiesBestandDialog.ShowDialog() == DialogResult.OK)
+            op = new OpenFileDialog();
+            if (op.ShowDialog() == DialogResult.OK)
             {
-                uploadBestandLocatie = kiesBestandDialog.FileName;
-            }
-            if (uploadBestandLocatie == "")
-            {
-                return;
-            }else
-            {
-                CategorienForm kiesCategorienForm = new CategorienForm(uploadBestandLocatie);
-            }
+                //naam komt van andere form
+                string naam12 = "1234";
+
+                mainclass.localUser.Upload(naam12,op.SafeFileName,mainclass.localUser.BezoekerID,op.FileName);
+
+                //mainclass.localUser.UploadFile(toUpload.Name,filePath); 
+                //moet nog naar de db geschreven worden
+
+                MessageBox.Show("Uw file is met succes geupload naar de server");
+            }  
         }
 
          private void buttonDownloaden_Click(object sender, EventArgs e)
