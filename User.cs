@@ -55,16 +55,17 @@ namespace FileShare
 
 
 
-        //De functie om een gebruiker een nieuwe categorie te laten aanmaken.
+        //De functies om een gebruiker een nieuwe categorie te laten aanmaken.
         public void CreeerCategorie(string naam, int parentID) 
         {
-            int? nullableParentID = parentID;
-            mainclass.AlleCategorieen.Add(new Categorie(naam, nullableParentID));
-            // connectie.Insert("Categorie", naam + ", " + parentNaam);
+            mainclass.AlleCategorieen.Add(new Categorie(naam, parentID));
+            connectie.Insert("Categorie", naam + ", " + parentID, "Naam, ParentID");
         }
+
         public void CreeerCategorie(string naam)
         {
             mainclass.AlleCategorieen.Add(new Categorie(naam));
+            connectie.Insert("Categorie", naam, "Naam");
         }
 
         //De functie om een stem te geven aan een bestand.

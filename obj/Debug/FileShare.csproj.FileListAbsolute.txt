@@ -42,3 +42,12 @@ C:\Users\HP user\Source\Repos\Fileshare\bin\Debug\FileShare.pdb
 C:\Users\HP user\Source\Repos\Fileshare\bin\Debug\mysql.data.dll
 C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.CategorienForm.resources
 C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.FormBestandZichtbaarheid.resources
+C:\Users\HP user\Source\Repos\Fileshare3\bin\Debug\FileShare.exe.config
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.exe
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.csprojResolveAssemblyReference.cache
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.CategorienForm.resources
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.FileShareForm.resources
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.FormBestandZichtbaarheid.resources
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.Login.resources
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.Properties.Resources.resources
+C:\Users\HP user\Source\Repos\Fileshare3\obj\Debug\FileShare.csproj.GenerateResource.Cache

@@ -34,6 +34,13 @@ namespace FileShare
             DataTable alleGebruikersTabel;
             DataTable categorienTabel;
 
+            //Tabellen leeggooien
+            AlleFiles.Clear();
+            EigenBestanden.Clear();
+            GeFlagteBestanden.Clear();
+            AlleGebruikers.Clear();
+            AlleCategorieen.Clear();
+
             //Hier worden alle gegevens opgehaald uit de database.
             if (localUser.Admin == false)
             {
@@ -65,13 +72,17 @@ namespace FileShare
                 AlleGebruikers.Add(new User(Int32.Parse(row["BezoekerID"].ToString()), row["Gebruikersnaam"].ToString(), row["Wachtwoord"].ToString(), row["soort"].ToString()));
             }
 
-            //foreach (DataRow row in categorienTabel.Rows)
-            //{
-            //    if (row["ParentID"].GetType.Equals(DBNull)) 
-            //    { 
-            //        row["ParentID"] = null;
-            //    }
-            //}
+            foreach (DataRow row in categorienTabel.Rows)
+            {
+                if (row["ParentID"].Equals(DBNull.Value)) 
+                { 
+                    AlleCategorieen.Add(new Categorie(Convert.ToInt32(row["CategorieID"]), Convert.ToString(row["Naam"])));
+                }
+                else
+                {
+                    AlleCategorieen.Add(new Categorie(Convert.ToInt32(row["CategorieID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["ParentID"])));
+                }
+            }
 
             //foreach (DataRow row in categorienTabel.Rows)
             //{

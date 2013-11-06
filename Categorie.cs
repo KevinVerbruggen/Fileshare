@@ -36,18 +36,24 @@ namespace FileShare
             set { files = value; }
             get { return files; }
         }
+
         public Categorie(string naam)
         {
             this.naam = naam;
             this.parentID = null;
         }
 
-        public Categorie(string naam, int? parentID)
+        public Categorie(string naam, int parentID)
         {
             this.naam = naam;
             this.parentID = parentID;
         }
 
+        public Categorie(int categorieID, string naam) 
+        {
+            this.categorieID = categorieID;
+            this.naam = naam;
+        }
         public Categorie(int categorieID, string naam, int? parentID)
         {
             this.categorieID = categorieID;
