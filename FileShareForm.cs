@@ -27,26 +27,8 @@ namespace FileShare
         public FileShareForm()
         {
             InitializeComponent();
-            mainclass.InitialiseerApp();
+            buttonVernieuwen_Click(null, null);
 
-            foreach (File bestand in mainclass.AlleFiles)
-            {
-                ListBoxBestanden.Items.Add(bestand.Naam);
-            }
-            foreach (Categorie categorie in mainclass.AlleCategorieen)
-            {
-                listBoxCategorie.Items.Add(categorie.Naam);
-            }
-            foreach (File bestand in mainclass.EigenBestanden)
-            {
-                ListBoxEigenBestanden.Items.Add(bestand.Naam);
-            }
-            foreach (File bestand in mainclass.GeFlagteBestanden)
-            {
-                ListBoxFlagBestanden.Items.Add(bestand.Naam);
-            }
-
-            if (labelIngelogdAls.Text.Contains("admin"))
             if (mainclass.localUser.Admin == true)
             {
                 tcAlleBestanden.TabPages.Remove(tabPage2);
@@ -55,9 +37,8 @@ namespace FileShare
             {
                 tcAlleBestanden.TabPages.Remove(tabPage3);
                 tcAlleBestanden.TabPages.Remove(tabPage4);
+                buttonGebruikerBlokkeren.Hide();
             }
-
-            buttonVernieuwen_Click(null, null);
         }
 
         public void VulLijstGeselecteerdeBestandenIDs() 
@@ -133,11 +114,27 @@ namespace FileShare
 
         private void buttonVernieuwen_Click(object sender, EventArgs e)
         {
+            //Alle lijsten clearen
+
+            mainclass.AlleCategorieen.Clear();
+            mainclass.AlleFiles.Clear();
+            mainclass.EigenBestanden.Clear();
+            mainclass.AlleGebruikers.Clear();
+            mainclass.GeFlagteBestanden.Clear();
+
+            mainclass.InitialiseerApp();
             listBoxCategorie.Items.Clear();
             ListBoxBestanden.Items.Clear();
-            mainclass.InitialiseerApp();
+            ListBoxEigenBestanden.Items.Clear();
+            ListBoxFlagBestanden.Items.Clear();
+            ListBoxAlleGebruikers.Items.Clear();
+
+            //mainclass.vulTabellen();
             listBoxCategorie.Items.AddRange(mainclass.AlleCategorieen.ToArray());
             ListBoxBestanden.Items.AddRange(mainclass.AlleFiles.ToArray());
+            ListBoxEigenBestanden.Items.AddRange(mainclass.EigenBestanden.ToArray());
+            ListBoxAlleGebruikers.Items.AddRange(mainclass.AlleGebruikers.ToArray());
+            ListBoxFlagBestanden.Items.AddRange(mainclass.GeFlagteBestanden.ToArray());
         }
 
         private void buttonVerwijderen2_Click(object sender, EventArgs e)
@@ -168,6 +165,16 @@ namespace FileShare
 
         private void listBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        private void buttonGebruikerBlokkeren_Click(object sender, EventArgs e)
+        {
+            if (ListBoxAlleGebruikers.SelectedItems.Count > 0)
+            {
+                int id = mainclass.AlleGebruikers[ListBoxAlleGebruikers.SelectedIndex].BezoekerID;
+                mainclass.localUser.Blokkeer(id);
+                MessageBox.Show("Gebruiker is geblokkeerd");
+            }
         }
     }
 }

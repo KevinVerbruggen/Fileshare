@@ -40,3 +40,5 @@ C:\Users\HP user\Source\Repos\Fileshare\obj\Debug\FileShare.FormBestandZichtbaar
 C:\Users\HP user\Source\Repos\Fileshare\bin\Debug\FileShare.exe
 C:\Users\HP user\Source\Repos\Fileshare\bin\Debug\FileShare.pdb
 C:\Users\HP user\Source\Repos\Fileshare\bin\Debug\mysql.data.dll
+C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.CategorienForm.resources
+C:\Users\Mr. Jin\Source\Repos\Fileshare\obj\Debug\FileShare.FormBestandZichtbaarheid.resources

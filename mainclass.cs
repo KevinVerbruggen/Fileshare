@@ -60,6 +60,10 @@ namespace FileShare
             {
                 GeFlagteBestanden.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
             }
+            foreach (DataRow row in alleGebruikersTabel.Rows)
+            {
+                AlleGebruikers.Add(new User(Int32.Parse(row["BezoekerID"].ToString()), row["Gebruikersnaam"].ToString(), row["Wachtwoord"].ToString(), row["soort"].ToString()));
+            }
 
             //foreach (DataRow row in categorienTabel.Rows)
             //{
@@ -69,10 +73,10 @@ namespace FileShare
             //    }
             //}
 
-            foreach (DataRow row in categorienTabel.Rows)
-            {
-                AlleCategorieen.Add(new Categorie(Convert.ToInt32(row["CategorieID"]), Convert.ToString(row["naam"]), Convert.ToInt32(row["ParentID"])));
-            }
+            //foreach (DataRow row in categorienTabel.Rows)
+            //{
+            //    AlleCategorieen.Add(new Categorie(Convert.ToInt32(row["CategorieID"]), Convert.ToString(row["naam"]), Convert.ToInt32(row["ParentID"])));
+            //}
         }
 
         public static bool StringToBool(string str) 
