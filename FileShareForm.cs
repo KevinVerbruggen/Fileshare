@@ -69,10 +69,10 @@ namespace FileShare
         private void buttonUploaden_Click(object sender, EventArgs e)
         {
             op = new OpenFileDialog();
-            if (op.ShowDialog() == DialogResult.OK)
-            {
-                new CategorienForm(op.SafeFileName, op.FileName);
-            }  
+            if (op.ShowDialog() == DialogResult.OK) {
+                CategorienForm ca = new CategorienForm(op.SafeFileName, op.FileName);
+                ca.Show();
+            }
         }
 
          private void buttonDownloaden_Click(object sender, EventArgs e)

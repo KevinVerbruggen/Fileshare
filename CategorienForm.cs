@@ -14,7 +14,7 @@ namespace FileShare
     {
         string uploadBestandLocatie;
         string bestandsNaam;
-        private List<int> checkedCategorien;
+        private List<int> checkedCategorien = new List<int>();
 
         public CategorienForm(string bestandsNaam, string uploadBestandLocatie)
         {
@@ -29,11 +29,17 @@ namespace FileShare
 
         private void vulListCategorien() 
         {
-            checkedCategorien.Clear();
-            foreach (int indexChecked in checkedListBoxCategorien.CheckedIndices)
+            if (checkedCategorien != null) 
+            { 
+                checkedCategorien.Clear(); 
+            }
+            if (checkedListBoxCategorien.CheckedIndices != null)
+            {
+                foreach (int indexChecked in checkedListBoxCategorien.CheckedIndices)
                 {
-                    this.checkedCategorien.Add(indexChecked);
+                    checkedCategorien.Add(indexChecked);
                 }
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -72,11 +78,27 @@ namespace FileShare
         private void buttonNieuweCategorie_Click(object sender, EventArgs e)
         {
             vulListCategorien();
-            if (this.checkedCategorien.Count == 1)
+            if (this.checkedCategorien != null)
             {
-                mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text, this.checkedCategorien[0]);
+                if (this.checkedCategorien.Count == 1)
+                {
+                    mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text, this.checkedCategorien[0]);
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("Je hebt meerdere categorieën geselecteerd. Als je doorgaat, zal de nieuwe categorie geen hoofdcategorie hebben.", "Let op!", MessageBoxButtons.OKCancel);
+                    if (result == DialogResult.Yes)
+                    {
+                        mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
+                        vulListCategorien();
+                    }
+                    else 
+                    {
+                    }
+                }
             }
-            else {
+            else 
+            {
                 mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
             }
 

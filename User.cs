@@ -65,7 +65,7 @@ namespace FileShare
         public void CreeerCategorie(string naam)
         {
             mainclass.AlleCategorieen.Add(new Categorie(naam));
-            connectie.Insert("Categorie", naam, "Naam");
+            connectie.Insert("Categorie", naam + ", " + DBNull.Value, "Naam, ParentID");
         }
 
         //De functie om een stem te geven aan een bestand.
