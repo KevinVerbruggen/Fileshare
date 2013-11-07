@@ -75,7 +75,7 @@ namespace FileShare
             return;
         }
 
-        private void buttonNieuweCategorie_Click(object sender, EventArgs e)
+        /*private void buttonNieuweCategorie_Click(object sender, EventArgs e)
         {
             vulListCategorien();
             if (this.checkedCategorien != null)
@@ -83,6 +83,10 @@ namespace FileShare
                 if (this.checkedCategorien.Count == 1)
                 {
                     mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text, this.checkedCategorien[0]);
+                }
+                else if (this.checkedCategorien.Count == 0)
+                {
+                    mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
                 }
                 else
                 {
@@ -92,7 +96,7 @@ namespace FileShare
                         mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
                         vulListCategorien();
                     }
-                    else 
+                    else
                     {
                     }
                 }
@@ -102,7 +106,7 @@ namespace FileShare
                 mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
             }
 
-        }
+        }*/
 
         private void textBoxNieuweCategorie_TextChanged(object sender, EventArgs e)
         {
