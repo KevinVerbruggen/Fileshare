@@ -16,7 +16,6 @@ namespace FileShare
         public List<int> GeselecteerdeBestandenIDs;
         public List<int> GeselecteerdeCategorieIDs;
         OpenFileDialog op;
-        public List<int> GeselecteerdeCategorieIdsBestanden;
         public string UserName
         {
             set 
@@ -51,18 +50,6 @@ namespace FileShare
             foreach (int i in ListBoxBestanden.SelectedIndices) 
             {
                 GeselecteerdeBestandenIDs.Add(ListBoxBestanden.SelectedIndices[i]);
-            }
-        }
-
-        public void VulLijstGeselecteerdeCategorieIDs() 
-        {
-            if (GeselecteerdeBestandenIDs != null)
-            {
-                GeselecteerdeCategorieIDs.Clear();
-            }
-            foreach (int i in listBoxCategorie.SelectedIndices) 
-            {
-                GeselecteerdeCategorieIDs.Add(listBoxCategorie.SelectedIndices[i]);
             }
         }
 
@@ -136,6 +123,7 @@ namespace FileShare
         private void listBoxBestandenVernieuwen() {
             if (listBoxCategorie.SelectedIndices.Count > 0)
             {
+                ListBoxBestanden.Items.Clear();
                 ListBoxBestanden.Items.AddRange(mainclass.GeselecteerdeCategorieBestanden.ToArray());
             }
             else
@@ -146,8 +134,7 @@ namespace FileShare
 
         private void buttonVerwijderen2_Click(object sender, EventArgs e)
         {
-            VulLijstGeselecteerdeCategorieIDs();
-            mainclass.VerwijderCategorie(GeselecteerdeCategorieIDs);
+            mainclass.VerwijderCategorie(listBoxCategorie.SelectedIndex);
         }
 
         private void FileShareForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -192,20 +179,7 @@ namespace FileShare
 
         private void listBoxCategorie_MouseClick(object sender, MouseEventArgs e)
         {
-            VulLijstGeselecteerdeCategorieIDs();
-            if (mainclass.GeselecteerdeCategorieBestanden != null)
-            {
-                mainclass.GeselecteerdeCategorieBestanden.Clear();
-            }
-            if (GeselecteerdeCategorieIdsBestanden != null)
-            {
-                GeselecteerdeCategorieIdsBestanden.Clear();
-            }
-            foreach (int categorie in GeselecteerdeCategorieIDs)
-            {
-                mainclass.VulLijstGeselecteerdeCategorieBestanden(categorie);
-
-            }
+            mainclass.VulLijstGeselecteerdeCategorieBestanden(listBoxCategorie.SelectedIndex);
             listBoxBestandenVernieuwen();
         }
     }

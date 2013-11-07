@@ -121,7 +121,6 @@
             this.listBoxCategorie.FormattingEnabled = true;
             this.listBoxCategorie.Location = new System.Drawing.Point(591, 332);
             this.listBoxCategorie.Name = "listBoxCategorie";
-            this.listBoxCategorie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBoxCategorie.Size = new System.Drawing.Size(185, 147);
             this.listBoxCategorie.TabIndex = 7;
             this.listBoxCategorie.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxCategorie_MouseClick);

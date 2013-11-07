@@ -89,7 +89,8 @@ namespace FileShare
         public static void VulLijstGeselecteerdeCategorieBestanden(int categorie)
         {
             DataTable geselecteerdeCategorieBestandenTabel;
-            geselecteerdeCategorieBestandenTabel = connectie.SelectMultiple("Bestand", "DISTINCT(*)", "BestandID IN (SELECT BestandID FROM Bestand_Categorie WHERE CategorieID = " + categorie);
+            geselecteerdeCategorieBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT BestandID FROM Bestand_Categorie WHERE CategorieID = " + categorie + ")");
+            GeselecteerdeCategorieBestanden.Clear();
             foreach (DataRow row in geselecteerdeCategorieBestandenTabel.Rows) 
             {
                 GeselecteerdeCategorieBestanden.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
@@ -158,13 +159,13 @@ namespace FileShare
         }
 
         //De functie om een categorie te verwijderen.
-        public static void VerwijderCategorie(List<int> categorieIDs)
+        public static void VerwijderCategorie(int categorieID)
         {
             if (localUser.Admin == true) //Indien de gebruiker de admin is,
             {
                 List<int> BestandIDs = new List<int>();
                 //alle bestanden die alleen in deze categorie zitten en de categorie zelf verwijderen.
-                DataTable BestandIDsDB = connectie.SelectMultiple("Bestand_categorie", "BestandID", "CategorieID = " + categorieIDs + "HAVING COUNT(*) < 2 GROUP BY BestandID");
+                DataTable BestandIDsDB = connectie.SelectMultiple("Bestand_categorie", "BestandID", "CategorieID = " + categorieID + "HAVING COUNT(*) < 2 GROUP BY BestandID");
                 foreach (DataRow row in BestandIDsDB.Rows)
                 {
                     BestandIDs.Add(Convert.ToInt32(row["BestandID"]));
@@ -174,11 +175,7 @@ namespace FileShare
                 {
                     mainclass.VerwijderBestand(BestandIDs[i], localUser.BezoekerID);
                 }
-
-                foreach (int i in categorieIDs)
-                {
-                    connectie.Delete("categorie", "categorieID=" + categorieIDs[i]);
-                }
+                connectie.Delete("categorie", "categorieID=" + categorieID);
             }
             else //Voor elke andere gebruiker,
             { //deze opdracht negeren
