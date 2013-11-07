@@ -89,7 +89,7 @@ namespace FileShare
         public static void VulLijstGeselecteerdeCategorieBestanden(int categorie)
         {
             DataTable geselecteerdeCategorieBestandenTabel;
-            geselecteerdeCategorieBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT BestandID FROM Bestand_Categorie WHERE CategorieID = " + categorie);
+            geselecteerdeCategorieBestandenTabel = connectie.SelectMultiple("Bestand", "DISTINCT(*)", "BestandID IN (SELECT BestandID FROM Bestand_Categorie WHERE CategorieID = " + categorie);
             foreach (DataRow row in geselecteerdeCategorieBestandenTabel.Rows) 
             {
                 GeselecteerdeCategorieBestanden.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));

@@ -172,20 +172,7 @@ namespace FileShare
 
         private void listBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (mainclass.GeselecteerdeCategorieBestanden != null)
-            {
-                mainclass.GeselecteerdeCategorieBestanden.Clear();
-            }
-            if (GeselecteerdeCategorieIdsBestanden != null)
-            {
-                GeselecteerdeCategorieIdsBestanden.Clear();
-            }
-            foreach (int categorie in GeselecteerdeCategorieIDs) 
-            {
-                mainclass.VulLijstGeselecteerdeCategorieBestanden(categorie);
-                
-            }
-            listBoxBestandenVernieuwen();
+            
         }
 
         private void buttonGebruikerBlokkeren_Click(object sender, EventArgs e)
@@ -201,6 +188,25 @@ namespace FileShare
         private void buttonGebruikerBlokkeren_Click_1(object sender, EventArgs e)
         {
             BezoekersForm bezoekersForm = new BezoekersForm();
+        }
+
+        private void listBoxCategorie_MouseClick(object sender, MouseEventArgs e)
+        {
+            VulLijstGeselecteerdeCategorieIDs();
+            if (mainclass.GeselecteerdeCategorieBestanden != null)
+            {
+                mainclass.GeselecteerdeCategorieBestanden.Clear();
+            }
+            if (GeselecteerdeCategorieIdsBestanden != null)
+            {
+                GeselecteerdeCategorieIdsBestanden.Clear();
+            }
+            foreach (int categorie in GeselecteerdeCategorieIDs)
+            {
+                mainclass.VulLijstGeselecteerdeCategorieBestanden(categorie);
+
+            }
+            listBoxBestandenVernieuwen();
         }
     }
 }

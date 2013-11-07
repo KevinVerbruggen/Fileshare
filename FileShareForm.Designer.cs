@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ListBoxBestanden = new System.Windows.Forms.ListBox();
             this.buttonDownloaden = new System.Windows.Forms.Button();
             this.buttonVerwijder = new System.Windows.Forms.Button();
@@ -48,6 +49,7 @@
             this.ListBoxAlleGebruikers = new System.Windows.Forms.ListBox();
             this.buttonFlag = new System.Windows.Forms.Button();
             this.buttonGebruikerBlokkeren = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tcAlleBestanden.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -122,6 +124,7 @@
             this.listBoxCategorie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBoxCategorie.Size = new System.Drawing.Size(185, 147);
             this.listBoxCategorie.TabIndex = 7;
+            this.listBoxCategorie.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxCategorie_MouseClick);
             this.listBoxCategorie.SelectedIndexChanged += new System.EventHandler(this.listBoxCategorie_SelectedIndexChanged);
             // 
             // buttonVernieuwen
@@ -254,6 +257,11 @@
             this.buttonGebruikerBlokkeren.UseVisualStyleBackColor = true;
             this.buttonGebruikerBlokkeren.Click += new System.EventHandler(this.buttonGebruikerBlokkeren_Click_1);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
             // FileShareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -306,6 +314,7 @@
         private System.Windows.Forms.ListBox ListBoxAlleGebruikers;
         private System.Windows.Forms.Button buttonFlag;
         private System.Windows.Forms.Button buttonGebruikerBlokkeren;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
