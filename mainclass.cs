@@ -24,6 +24,7 @@ namespace FileShare
         public static DBconnect connectie = DBconnect.Instantie;
         public static Computer myComputer = new Computer();
         public static User localUser;
+        public static List<File> GeselecteerdeCategorieBestanden = new List<File>();
 
         public static void InitialiseerApp()
         {
@@ -33,7 +34,7 @@ namespace FileShare
             DataTable geFlagteBestandenTabel;
             DataTable alleGebruikersTabel;
             DataTable categorienTabel;
-
+            
             //Tabellen leeggooien
             AlleFiles.Clear();
             EigenBestanden.Clear();
@@ -82,6 +83,16 @@ namespace FileShare
                 {
                     AlleCategorieen.Add(new Categorie(Convert.ToInt32(row["CategorieID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["ParentID"])));
                 }
+            }
+        }
+
+        public static void VulLijstGeselecteerdeCategorieBestanden(int categorie)
+        {
+            DataTable geselecteerdeCategorieBestandenTabel;
+            geselecteerdeCategorieBestandenTabel = connectie.SelectMultiple("Bestand", "*", "BestandID IN (SELECT BestandID FROM Bestand_Categorie WHERE CategorieID = " + categorie);
+            foreach (DataRow row in geselecteerdeCategorieBestandenTabel.Rows) 
+            {
+                GeselecteerdeCategorieBestanden.Add(new File(Convert.ToInt32(row["BestandID"]), Convert.ToString(row["Naam"]), Convert.ToInt32(row["BezoekerID"]), Convert.ToString(row["Locatie"])));
             }
         }
 

@@ -75,25 +75,25 @@ namespace FileShare
             return;
         }
 
-        /*private void buttonNieuweCategorie_Click(object sender, EventArgs e)
+        private void buttonNieuweCategorie_Click(object sender, EventArgs e)
         {
             vulListCategorien();
             if (this.checkedCategorien != null)
             {
                 if (this.checkedCategorien.Count == 1)
                 {
-                    mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text, this.checkedCategorien[0]);
+                    //mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text, this.checkedCategorien[0]);
                 }
                 else if (this.checkedCategorien.Count == 0)
                 {
-                    mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
+                    //mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
                 }
                 else
                 {
                     DialogResult result = MessageBox.Show("Je hebt meerdere categorieën geselecteerd. Als je doorgaat, zal de nieuwe categorie geen hoofdcategorie hebben.", "Let op!", MessageBoxButtons.OKCancel);
                     if (result == DialogResult.Yes)
                     {
-                        mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
+                        //mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
                         vulListCategorien();
                     }
                     else
@@ -103,10 +103,10 @@ namespace FileShare
             }
             else 
             {
-                mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
+                //mainclass.localUser.CreeerCategorie(this.textBoxNieuweCategorie.Text);
             }
 
-        }*/
+        }
 
         private void textBoxNieuweCategorie_TextChanged(object sender, EventArgs e)
         {

@@ -16,7 +16,7 @@ namespace FileShare
         public List<int> GeselecteerdeBestandenIDs;
         public List<int> GeselecteerdeCategorieIDs;
         OpenFileDialog op;
-        
+        public List<int> GeselecteerdeCategorieIdsBestanden;
         public string UserName
         {
             set 
@@ -127,10 +127,21 @@ namespace FileShare
 
             //mainclass.vulTabellen();
             listBoxCategorie.Items.AddRange(mainclass.AlleCategorieen.ToArray());
-            ListBoxBestanden.Items.AddRange(mainclass.AlleFiles.ToArray());
-            ListBoxEigenBestanden.Items.AddRange(mainclass.EigenBestanden.ToArray());
+            ListBoxEigenBestanden.Items.AddRange(mainclass.EigenBestanden.ToArray());  
             ListBoxAlleGebruikers.Items.AddRange(mainclass.AlleGebruikers.ToArray());
             ListBoxFlagBestanden.Items.AddRange(mainclass.GeFlagteBestanden.ToArray());
+            listBoxBestandenVernieuwen();
+        }
+
+        private void listBoxBestandenVernieuwen() {
+            if (listBoxCategorie.SelectedIndices.Count > 0)
+            {
+                ListBoxBestanden.Items.AddRange(mainclass.GeselecteerdeCategorieBestanden.ToArray());
+            }
+            else
+            {
+                ListBoxBestanden.Items.AddRange(mainclass.AlleFiles.ToArray());
+            }
         }
 
         private void buttonVerwijderen2_Click(object sender, EventArgs e)
@@ -161,6 +172,20 @@ namespace FileShare
 
         private void listBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (mainclass.GeselecteerdeCategorieBestanden != null)
+            {
+                mainclass.GeselecteerdeCategorieBestanden.Clear();
+            }
+            if (GeselecteerdeCategorieIdsBestanden != null)
+            {
+                GeselecteerdeCategorieIdsBestanden.Clear();
+            }
+            foreach (int categorie in GeselecteerdeCategorieIDs) 
+            {
+                mainclass.VulLijstGeselecteerdeCategorieBestanden(categorie);
+                
+            }
+            listBoxBestandenVernieuwen();
         }
 
         private void buttonGebruikerBlokkeren_Click(object sender, EventArgs e)
